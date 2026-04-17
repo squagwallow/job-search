@@ -12,22 +12,27 @@ url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/docs/current-state.
 - Engineered prompts written (job search, prepare application materials)
 - Entry doc, user guide, and orchestration index created
 - Skill v0.4 retrofit applied
+- Upwork profile populated (upwork/profile.md)
+- Upwork portfolio populated (upwork/portfolio.md) — 3 items, 1 queued
+- Upwork strategy populated (upwork/strategy.md)
+- Upwork income strategy doc created (docs/upwork-income-strategy.md)
+- Cover letter style guide drafted (process/cover-letter-style-guide.md)
+- Writing samples bank seeded — 4 samples from crawled proposals
+- First live job search test run — improved batch JS method identified
+- Exit protocol updated — GitHub connector check or downloadable folder
 
 ## In Progress
-- Content population across silos
-- Live testing of engineered prompts
+- Live Upwork job search and proposal activity
+- 3 jobs queued for application (queue/flagged-jobs.md)
+- Cover letter style guide refinement (update after first outcomes land)
 
 ## Blocked
 - None
 
 ## Not Started
-- Upwork profile content
-- Upwork portfolio content
-- Upwork strategy content
+- Upwork portfolio: encyclopedia item (needs Netlify hosting)
 - General-jobs LinkedIn profile content
 - General-jobs Indeed profile content
 - General-jobs resume variants
 - General-jobs strategy content
-- Cover letter style guide content
-- Writing samples bank population
-- Queue initialization (empty at start)
+- Queue initialization beyond current 3 entries
