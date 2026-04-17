@@ -5,37 +5,160 @@ url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/process/cover-lette
 
 # Cover Letter Style Guide
 
-**[STUB — populate from your own writing principles. See POPULATED BY at the end.]**
+Extracted from approved Upwork proposals (April 2026). Update whenever
+new patterns emerge from submitted or successful samples. Examples
+carry more weight than rules — when in doubt, read the samples.
 
-Canonical reference for voice, structure, and default protocols when drafting cover letters, Upwork proposals, or application-question responses. Loaded by `process/prepare-application-prompt.md` whenever any of those deliverables is in play.
+---
 
-## Format to follow when populated
+## Voice
 
-### Voice
-Describe the voice in 2–3 sentences. Better: paste 2–3 short excerpts from your approved samples that exemplify it.
+Warm but direct. Not stiff, not casual. Writes like someone who has
+thought carefully about the client's situation before typing anything.
 
-### Default structure
-List the default outline elements you want every cover letter to follow, in order. Example:
-1. Opening — one line establishing who I am and why I'm writing.
-2. Their situation — my read on what they need.
-3. Fit — 2–3 concrete mappings between their need and my background.
-4. Address explicit asks — anything the listing said to include.
-5. Close — next step, availability, clean sign-off.
+Two registers — use the right one for the job type:
 
-### Channel-specific conventions
-- **Upwork proposals:** length target, opening style, how portfolio links are integrated, anything specific to the platform.
-- **General cover letters:** length target, opening style, formality level, anything specific to traditional applications.
+**Architect register** (systems builds, ops redesign, workflow architecture):
+Leads with the client's problem, not credentials. Analytical. Specific
+about how the work gets done. Questions at the end invite dialogue.
+See: 2026-04-15-upwork-agency-ops-workflow.md
 
-### Defaults (override with cause)
-- Default length by channel (e.g., "Upwork: 150–250 words; general: 250–400 words").
-- Default opening pattern.
-- Default close.
+**Coach/facilitator register** (training, coaching, consulting, teaching):
+Leads with a point of human connection — "I've been where you are."
+Therapist/facilitator identity is front and center. Warmer close.
+See: 2026-04-15-upwork-ai-coaching-business-setup.md
 
-### Never do (hard rules only — keep short)
-Only things you genuinely never want in a letter. For preferences, use defaults instead.
+Never: boastful, credential-listing, "I'm excited about this
+opportunity," "I have X years of experience."
 
-### Examples
-Paste 2–3 short excerpts from approved samples showing the voice in action. Examples carry more than rules.
+---
 
-## POPULATED BY
-You. The most reliable way to fill this: read through your approved writing samples and extract the patterns you already use. When in doubt, paste the excerpt and let the pattern emerge from multiple examples rather than stating rules abstractly. Update whenever you notice a new consistent move across samples.
+## Default structure (Upwork proposals)
+
+1. Opening — Client's problem, or a point of genuine connection.
+   Never open with your name or a credential. One sentence or a short
+   paragraph. Must be specific to this listing — not generic.
+
+2. Bridge — What connects you to this problem. The non-technical
+   origin story ("I came into this from the same place you're starting")
+   OR the domain analogy ("Different domain, same failure mode"). Pick
+   one. Don't use both.
+
+3. Proof anchor — One concrete thing that demonstrates you can do
+   this. Cornflower Health is the default anchor for technical/systems
+   work. Harvard/NASEM or facilitation background for writing/training
+   work. One reference, not three.
+
+4. Specifics — How you'd actually approach their work. Not generic
+   methodology — specific to what they described. Shows you read the
+   listing.
+
+5. Discovery questions or soft CTA — 1-2 questions that invite
+   reply, OR a call invitation with a low-friction ask (e.g., "share
+   one question mark going in"). Never "let me know if you're
+   interested."
+
+6. Close — Name only, or "Warmly, Jonathan" for coaching register.
+   No formal sign-offs.
+
+---
+
+## Channel-specific conventions
+
+### Upwork proposals
+- Length: 250-450 words for most roles. Complex systems/architecture
+  roles can run longer if the extra length is all substance — every
+  paragraph doing work.
+- Headers: Only for complex multi-part proposals where the client
+  needs to navigate. Default: flowing paragraphs, no headers.
+- Portfolio links: Reference by name ("Cornflower Health case study")
+  or link once. Never list all portfolio items.
+- Rate/pricing: Address directly and specifically when the listing
+  has a stated budget or when proposing fixed-price. Don't hedge.
+  Example: "I'd propose a flat $1,200 for the half-day workshop."
+- Availability: State it specifically when the listing asks.
+  Don't volunteer it when it's not asked.
+
+---
+
+## Defaults (override with cause)
+
+- Default opener type: Client's problem (architect) or shared
+  starting point (coach). Not a credential.
+- Default proof anchor: Cornflower Health for technical work;
+  Harvard/NASEM for writing/research; facilitation background for
+  training.
+- Default close: First name only. "Warmly" for coaching register.
+- Default length: 300-400 words.
+- Default rate posture: State the rate or price clearly and once.
+  Don't apologize for it.
+
+---
+
+## Never do
+
+- Open with "I'm excited about this opportunity" or any variant.
+- List credentials as bullets ("I have experience in X, Y, and Z").
+- Reference all three portfolio items — pick the most relevant one.
+- End with "Please let me know if you have any questions" alone —
+  always pair with a specific question or CTA of your own.
+- Use jargon the client didn't use first.
+- Use dashes as punctuation (em dashes, en dashes). Rewrite the
+  sentence instead.
+- Use common AI writing tropes: "leverage," "delve," "seamlessly,"
+  "game-changer," "cutting-edge," "tailored," "it's worth noting,"
+  "I'd be happy to," "certainly," "absolutely," "in today's
+  fast-paced world," or any phrase that sounds like it was written
+  by a model trying to sound professional.
+
+## Note on existing samples
+
+The four samples in writing-samples/ (April 2026) predate the
+no-dashes rule and contain em dashes. When drawing from them,
+rewrite any dash-punctuated sentences. Do not reproduce the
+dash constructions directly.
+
+---
+
+## Voice excerpts (examples carry more than rules)
+
+**Architect opener — leads with client's problem:**
+"Your agency has outgrown a founder-centered model. Fixing that
+requires redesigning how work gets done across clients, roles, and
+systems without routing decisions or processes back through you."
+
+**Coach opener — shared starting point:**
+"I came into AI workflow consulting from the non-technical side,
+which is exactly where your team is starting."
+
+**Proof anchor via domain analogy:**
+"Cornflower Health is an AI-assisted pipeline I designed to replace
+a fragmented, user-dependent workflow with something structured,
+automatically documented, and maintainable through LLM orchestration.
+Different domain, same failure mode."
+
+**Soft CTA with discovery question:**
+"I'd love to have a 30-minute intro call to hear more about your
+goals. If that sounds good, let me know some times that work in the
+coming days, and if you're open to it you can share one of your
+biggest question marks going into this process so I can come with
+some ideas in mind."
+
+**Fixed-price framing — direct, no hedging:**
+"For this project, I'd propose a flat $1,200 for the half-day
+workshop. For optional 1:1 follow-up sessions, my rate is $65/hour,
+billed in 60-minute blocks."
+
+---
+
+## Update protocol
+
+After each submitted proposal: add the file to writing-samples/ and
+note register, CTA type, and anything that felt new or different.
+
+After each outcome (hired, interview, no reply): update the outcome
+field in the sample file. Patterns across outcomes are how this guide
+improves — don't skip the update.
+
+Revisit this guide when: 5+ new samples added, or a clear pattern
+emerges in what's getting replies vs. silence.

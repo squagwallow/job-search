@@ -30,6 +30,7 @@ Load based on explicit triggers, not open-ended relevance.
 - **`formats/job-listing-format.md`** — Load whenever surfacing, logging, or documenting any job.
 - **`formats/writing-sample-format.md`** — Load when adding to or drawing from the writing samples bank.
 - **Upwork silo (`upwork/*`)** — Load when the directive involves Upwork.
+- **`docs/upwork-income-strategy.md`** — Load in every Upwork session alongside the Upwork silo files.
 - **General-jobs silo (`general-jobs/*`)** — Load when the directive involves any non-Upwork job.
 - **`queue/flagged-jobs.md`** — Load when the user references flagged/queued jobs or asks what's in the queue.
 
@@ -45,10 +46,10 @@ Load based on explicit triggers, not open-ended relevance.
 Maintain a notes block throughout sessions per these rules.
 
 Triggered on:
-- First major decision point → prompt: "we're starting to make decisions — want me to start taking notes?" If yes, activate.
-- Thread getting long → prompt: "this thread is getting substantial — want me to start tracking notes and context?" If yes, activate.
-- User says any of: "note that", "keep track", "where are we", "give me an update", "what's our status" → activate immediately, no prompt needed.
-- A decision is made, a task is completed, or a state-changing action occurs → update if already active.
+- First major decision point — prompt: "we're starting to make decisions — want me to start taking notes?" If yes, activate.
+- Thread getting long — prompt: "this thread is getting substantial — want me to start tracking notes and context?" If yes, activate.
+- User says any of: "note that", "keep track", "where are we", "give me an update", "what's our status" — activate immediately, no prompt needed.
+- A decision is made, a task is completed, or a state-changing action occurs — update if already active.
 
 Once active: stays on until user says "pause notes".
 
@@ -59,7 +60,7 @@ Format:
 → [Active tasks]
 ? [Open questions]
 ⚑ [Flagged for next thread]
-Context: [0–25% | 25–50% | 50–75% | 75%+ compact soon]
+Context: [0-25% | 25-50% | 50-75% | 75%+ compact soon]
 ───────────────────────────────────
 ```
 
@@ -86,4 +87,12 @@ Before executing any directive:
 3. State any assumptions about scope before acting.
 
 ## Exit Protocol
+
 At session end: append an entry to `docs/handoff-log.md` and update `docs/current-state.md`. State snapshot only — no transcript, no rationale for settled decisions.
+
+**Committing changes to the repo — default sequence:**
+
+1. Check whether a GitHub MCP connector is available in the current session. If yes, use it to push all changed files directly and confirm the commit.
+2. If no GitHub connector is available, generate a downloadable folder containing all changed files at their correct repo paths. The user extracts this folder into the repo root and commits with `git add . && git commit -m "[session label]" && git push`.
+
+When generating the downloadable folder: include only files that changed this session. Preserve the exact directory structure (e.g., `upwork/profile.md`, `process/writing-samples/filename.md`). Output a manifest listing every file included and what changed.
