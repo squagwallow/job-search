@@ -1,6 +1,6 @@
 project_slug: job-search
 doc_type: decision-log
-updated_at: 2026-04-17
+updated_at: 2026-04-19
 url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/docs/decision-log.md
 
 # Decision Log
@@ -40,3 +40,27 @@ Append-only. Each entry: decision + one-sentence rationale + date.
 **Decision:** Revision mode trigger phrases are "inspect repo", "update system", "revise [file]". *Clear verbal switch between project work and system maintenance prevents accidental doc edits during job-search sessions. Date: 2026-04-17*
 
 **Decision:** No-directive loads surface the user guide, not the prompt inventory. *The user guide is human-facing; it tells the user what they can do and how to say it. Prompt inventory is for the LLM in revision mode. Date: 2026-04-17*
+
+---
+
+## v1 Architecture Decisions — 2026-04-19
+
+**Decision:** v1 architecture is git + scoped Notion MCP. *Git holds orchestration layer (entry doc, prompts, strategy, formats). Notion holds active databases (job queue, writing samples catalog). LLM reads git via GitHub MCP, reads/writes Notion via scoped internal integration token. Date: 2026-04-19*
+
+**Decision:** Notion internal integration token (not managed OAuth) is the correct Notion access mechanism. *Internal token supports per-page scoping; managed OAuth grants workspace-wide access and is not configurable. Verified: integration only sees pages explicitly shared with it. Date: 2026-04-19*
+
+**Decision:** One Notion integration per project. *Separate tokens per engagement enforce hard scoping at the access layer, not via prompt discipline. Date: 2026-04-19*
+
+**Decision:** Flagged Jobs queue moves from git (queue/flagged-jobs.md) to Notion database. *Tabular active content the human edits directly belongs in a native database surface, not a markdown file requiring git commits for every status change. Date: 2026-04-19*
+
+**Decision:** Writing Samples catalog moves to Notion database; content files stay in git. *Catalog metadata (tags, use-case, strongest-for) benefits from database filtering. Full sample content stays in git as markdown. Date: 2026-04-19*
+
+**Decision:** GitHub MCP write access confirmed working in Claude Desktop. *Fine-grained PAT with Contents: Read and Write can commit files to branches via the official GitHub MCP server. Claude Desktop is a viable primary git-write surface without Claude Code. Date: 2026-04-19*
+
+**Decision:** Perplexity is the secondary LLM surface (mobile/web fallback). *Perplexity has native git write capability. Combined with Claude Desktop, this gives multi-LLM coverage without requiring ChatGPT or Gemini. Date: 2026-04-19*
+
+**Decision:** Notion database creation requires one manual step — LLM cannot create databases via MCP. *The Notion MCP server does not expose the POST /v1/databases endpoint. Workaround: human creates blank database, LLM populates schema via API-update-a-data-source. Date: 2026-04-19*
+
+**Decision:** THREAD NOTES format adopted — always-on with turn counter. *Always-on notes with turn counter and aggressive pruning are more reliable than trigger-based blocks that may not appear when needed. Date: 2026-04-19*
+
+**Decision:** Encyclopedia conditional reading scoped to revision mode only. *LLM Prompt & Context Design Principles encyclopedia is a prompt engineering resource, not a job-search resource. Load only when editing prompts or entry.md structure. Date: 2026-04-19*

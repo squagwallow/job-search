@@ -60,6 +60,7 @@ Load based on explicit triggers, not open-ended relevance.
 - **General-jobs silo (`general-jobs/*`)** — Load when the directive involves any non-Upwork job.
 - **Notion: Flagged Jobs** — Load when the user references flagged/queued jobs or asks what's in the queue.
 - **Notion: Writing Samples** — Load when prepare-application flow requires writing sample selection.
+- **Encyclopedia: LLM Prompt & Context Design Principles** → https://elaborate-belekoy-9e0eef.netlify.app/llm-design-encyclopedia — Load only in revision mode when editing any prompt, trigger condition, or entry.md structure.
 
 ## Standing Instructions
 
@@ -71,34 +72,37 @@ Load based on explicit triggers, not open-ended relevance.
 
 ## Notes Block
 
-Maintain a notes block throughout sessions per these rules.
+Maintain a THREAD NOTES block in every reply. Update before writing the main response.
 
-Triggered on:
-- First major decision point — prompt: "we're starting to make decisions — want me to start taking notes?" If yes, activate.
-- Thread getting long — prompt: "this thread is getting substantial — want me to start tracking notes and context?" If yes, activate.
-- User says any of: "note that", "keep track", "where are we", "give me an update", "what's our status" — activate immediately, no prompt needed.
-- A decision is made, a task is completed, or a state-changing action occurs — update if already active.
-
-Once active: stays on until user says "pause notes".
+Update order:
+- Prune: Remove items that are obsolete or irrelevant.
+- Merge: Combine related points into one short clause.
+- Tighten: Rewrite for maximum brevity and clarity.
+- Add: Only add new items important for future turns.
 
 Format:
 ```
-─── THREAD NOTES ──────────────────
-✓ [Settled decisions]
-→ [Active tasks]
-? [Open questions]
-⚑ [Flagged for next thread]
-Context: [0-25% | 25-50% | 50-75% | 75%+ compact soon]
-───────────────────────────────────
+THREAD NOTES (Turn N)
+✓ Settled: brief decisions, separated by · where possible
+→ Active: current tasks / work in progress (max 3 items)
+? Open: unresolved questions / forks (max 5 items)
+Δ Meta: optional constraints/observations (omit line when empty)
 ```
 
-Append to responses only when the block changes. Do not append to every response.
+Rules:
+- Always update THREAD NOTES first, then write main reply.
+- Keep the block as short as possible while still accurate.
+- Prefer deleting and merging over letting it grow.
+- No emojis, bold, markdown headings, or bullet lists inside THREAD NOTES.
+- Use inline separators (·) instead of extra line breaks.
+- When Turn N > 20, be extra aggressive about pruning; consider suggesting thread rotation.
 
 ## Revision Mode
 
 If the user says "inspect repo", "update system", "revise [file]", or any variant indicating they want to change the documentation itself rather than do project work:
 - Switch from project work mode to system maintenance mode.
 - Load the relevant file.
+- Load the Encyclopedia (see Conditional Reading) before proposing any prompt or structure changes.
 - Propose the change before implementing.
 - Output the full updated file for the user to commit.
 - Update `prompt-engineer-entry.md` if the change affects any prompt, automation, or orchestration relationship.
