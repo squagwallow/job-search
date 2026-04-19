@@ -30,10 +30,9 @@ url: https://raw.githubusercontent.com/squagwallow/job-search/v1-notion-mcp/docs
 - Notion queue synced: 8 jobs reviewed, 5 updated (05 canned, 03 apply, 04 corrected, 07 skip, 02 skip)
 - Upwork profile headline updated (Notion added), overview updated, skills reordered
 - Corporate upskilling proposal (03) drafted and submitted
-- Notion architecture case study: source doc identified, write-up prompt prepared for new thread
+- Notion architecture case study: built and live at https://curious-sunshine-0eeed4.netlify.app/
 
 ## In Progress
-- Notion architecture case study build (new thread — separate from this session)
 - Upwork proposal velocity: skeleton ready, search + send 5 proposals is next action
 
 ## Blocked
@@ -48,3 +47,6 @@ url: https://raw.githubusercontent.com/squagwallow/job-search/v1-notion-mcp/docs
 - General-jobs resume variants
 - General-jobs strategy content
 - Notion niche search + proposal send (5 target)
+
+## Housekeeping
+- **Netlify hosting**: resolve credits issue or find a better free hosting option (affects portfolio item hosting)
