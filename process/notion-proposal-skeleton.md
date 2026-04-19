@@ -30,18 +30,14 @@ Jonathan
 
 Use one. Do not use both. Do not write a new one from scratch.
 
+**Spinwheel** (AI-integrated Notion systems, session continuity, pipeline/contract management clients):
+"I recently designed Spinwheel — a freelance contract management system built in Notion with a live Claude MCP integration. Three databases, 12 taxonomy tags, and a session protocol that means the AI knows what's in the pipeline and what proposals exist without re-explanation every time. The schema decisions — like collapsing status into a single priority field to eliminate write surface — came from designing for how AI reads and writes, not just how a human browses."
+
 **Cornflower Health** (health tech, data pipeline, automation-heavy clients):
-"Cornflower Health is an AI-directed health data pipeline I designed and have
-been running for over a year. It pulls Apple Watch data through a webhook
-backend, normalizes it into a structured schema, and syncs into Notion
-dashboards with an LLM coaching layer on top. Notion is the operational core
-the whole system runs on."
+"Cornflower Health is an AI-directed health data pipeline I designed and have been running for over a year. It pulls Apple Watch data through a webhook backend, normalizes it into a structured schema, and syncs into Notion dashboards with an LLM coaching layer on top. Notion is the operational core the whole system runs on."
 
 **Job-search system** (multi-database, workflow ops, team workspace clients):
-"I've been running a Notion-based project operations system of my own design
-for the past several months. It has a live job queue, a writing samples
-catalog, session handoff protocols, and GitHub integration for version
-control across multiple active use cases."
+"I've been running a Notion-based project operations system of my own design for the past several months. It has a live job queue, a writing samples catalog, session handoff protocols, and GitHub integration for version control across multiple active use cases."
 
 ---
 
@@ -50,8 +46,10 @@ control across multiple active use cases."
 A: Must come from the listing verbatim or near-verbatim. If you are
    generalizing, you are doing it wrong.
 
-B: Pick the pre-written hook above. Swap in one bridging clause if the
-   client's domain is specific (e.g. "production company" instead of "project").
+B: Pick the pre-written hook above. Spinwheel is the strongest hook for
+   any client building an AI-integrated Notion workspace. Cornflower for
+   health/data/automation. Job-search system for ops/workflow/multi-database.
+   Swap in one bridging clause if the client's domain is specific.
    Do not rewrite the hook from scratch.
 
 C: Two sentences max. Name their actual tools if they listed any.
