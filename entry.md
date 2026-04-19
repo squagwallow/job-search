@@ -11,7 +11,7 @@ This is the v1 architecture. Two layers:
 - **Git** (this repo, `v1-notion-mcp` branch) — orchestration, prompts, strategy, formats, profiles. Read via GitHub MCP.
 - **Notion** (`notion-job-search` integration) — active databases: job queue, writing samples catalog. Read/write via Notion MCP.
 
-When starting a session, load this entry doc first. Then load Notion databases on demand per the conditional loading rules below.
+When starting a session, load this entry doc first. Then load the handoff log and current state. Then load Notion databases on demand per the conditional loading rules below.
 
 ## Purpose
 A consolidated context layer for the user's job search. Centralizes profiles, strategy, writing samples, and a standard job format so any LLM session can be pointed at this doc and pick up the ongoing process without manual uploads or re-explanation.
@@ -45,6 +45,13 @@ The following live in Notion, not git. Use the `notion-job-search` MCP integrati
 **Notion MCP server:** `notion-job-search`
 Scope: job-search workspace only. Do not search or query beyond the databases listed above.
 
+## Required Reading — Always Load
+
+These load every session without exception, immediately after this entry doc:
+
+- **`docs/handoff-log.md`** (top entry only) — carry-forward decisions, do-not-repeat list, next action. Must be read before any directive is executed.
+- **`docs/current-state.md`** — current in-progress and blocked items.
+
 ## Required Reading — Conditional
 
 Load based on explicit triggers, not open-ended relevance.
@@ -58,7 +65,7 @@ Load based on explicit triggers, not open-ended relevance.
 - **Upwork silo (`upwork/*`)** — Load when the directive involves Upwork.
 - **`docs/upwork-income-strategy.md`** — Load in every Upwork session alongside the Upwork silo files.
 - **General-jobs silo (`general-jobs/*`)** — Load when the directive involves any non-Upwork job. Note: this silo exists on `main` branch only — files must be ported to `v1-notion-mcp` before use.
-- **Notion: Flagged Jobs** — Load when the user references flagged/queued jobs or asks what's in the queue.
+- **Notion: Flagged Jobs** — Load when the user references flagged/queued jobs or asks what's in the queue. ALSO load at the start of every job search session to extract already-seen job IDs before searching.
 - **Notion: Writing Samples** — Load when prepare-application flow requires writing sample selection.
 - **Encyclopedia: LLM Prompt & Context Design Principles** → https://elaborate-belekoy-9e0eef.netlify.app/llm-design-encyclopedia — Load only in revision mode when editing any prompt, trigger condition, or entry.md structure.
 
@@ -110,9 +117,11 @@ If the user loads this entry with no additional context or directive, present a 
 
 ## Pre-Task Checklist
 Before executing any directive:
-1. Confirm which silo applies (Upwork / general-jobs / both).
-2. Confirm the relevant profile and strategy docs have been loaded.
-3. State any assumptions about scope before acting.
+1. Confirm handoff log (top entry) has been read this session.
+2. Confirm which silo applies (Upwork / general-jobs / both).
+3. Confirm the relevant profile and strategy docs have been loaded.
+4. For job search directives: confirm Notion Flagged Jobs has been read and exclusion IDs extracted.
+5. State any assumptions about scope before acting.
 
 ## Exit Protocol
 

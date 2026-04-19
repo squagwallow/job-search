@@ -16,6 +16,13 @@ User says any variant of:
 
 ## Process
 
+### Step 0 — Read Notion queue and build exclusion list (MANDATORY FIRST STEP)
+Before running any search, read the Notion Flagged Jobs database via `notion-job-search` MCP.
+Extract all job IDs (the `~` numeric ID from each record's link field).
+Store as an exclusion set. Any search result whose job ID matches this set is silently discarded — do not surface, do not log, do not comment on.
+
+This step is non-negotiable. Do not begin keyword searches until the exclusion set is built.
+
 ### Step 1 — Determine silo
 If the user specified Upwork or general-jobs, proceed.  
 If not, ask: "Upwork, general jobs, or both?"
@@ -32,6 +39,7 @@ Before searching, state back in one or two lines:
 - What role types and must-haves from the strategy doc
 - What dealbreakers you're filtering against
 - How many jobs to return (default: 10)
+- How many IDs are in the exclusion set
 
 Proceed unless the user corrects.
 
@@ -44,86 +52,85 @@ Proceed unless the user corrects.
 1. Run 4–6 keyword searches sequentially using `browser_run_code`. Navigate to:
    `https://www.upwork.com/nx/search/jobs/?q=[keyword]&sort=recency&per_page=20`
 
-2. On each results page, use `page.evaluate()` to extract all job tiles in a single JavaScript batch call — do not navigate to individual listings yet. Extract: title, link (`a[href*="/jobs/"]`), and snippet text from `article[data-test]` elements.
+2. On each results page, use `page.evaluate()` to extract all job links in a single JavaScript batch call — do not navigate to individual listings yet. Extract: title, href, and snippet text.
 
-3. Evaluate all titles and snippets from the batch against strategy filters. Identify the top 2–4 candidates per search pass worth navigating to.
+3. Evaluate all titles and snippets from the batch against strategy filters AND the exclusion set from Step 0. Silently discard any job whose ID is in the exclusion set. Identify the top candidates worth navigating to.
 
 4. Navigate to individual listings only for top candidates. Extract full body text via `page.evaluate(() => document.body.innerText)`.
 
-5. Clean all links: Upwork job links sometimes contain `span-class-highlight` cruft. Strip to canonical form: `https://www.upwork.com/jobs/~[job_id]/`. The job ID is the `~0220...` segment at the end.
+5. Clean all links: strip to canonical form `https://www.upwork.com/jobs/~[job_id]/`.
 
 **Fallback:** If Playwright is unavailable in the session, use web search with the same keyword list. Note the fallback in the summary line.
 
 **For each candidate listing, apply:**
 
-- **Hard gate 1 — fixed live link.** Direct URL to the specific posting required. No aggregator URLs, no search pages, no reconstructed links. Discard silently if absent.
-- **Hard gate 2 — dealbreakers.** Check against strategy doc hard disqualifiers. Discard by default. Override with `dealbreaker check: fail: [reason]` only if the job is otherwise very strong.
-- **Hard gate 3 — client rate signal.** If client profile shows avg hourly rate paid well below the $65/hr floor (e.g., under $30/hr), treat as a soft dealbreaker. Flag it in Notes rather than hard-discarding unless the rate disparity is extreme.
+- **Hard gate 1 — fixed live link.** Direct URL to the specific posting required. Discard silently if absent.
+- **Hard gate 2 — dealbreakers.** Check against strategy doc hard disqualifiers. Discard by default.
+- **Hard gate 3 — exclusion set.** Any job ID matching the Notion queue is silently discarded regardless of fit.
+- **Hard gate 4 — client rate signal.** If client avg hourly rate paid well below $65/hr floor, treat as soft dealbreaker.
 
 Continue until target count is met.
 
 ### Step 5 — Return results
-Return all jobs in the canonical format from `formats/job-listing-format.md`. Group by priority if useful. End with a one-line summary: "X jobs returned, Y discarded for missing links, Z discarded for dealbreakers."
+Return all jobs in the canonical format from `formats/job-listing-format.md`. End with a one-line summary: "X jobs returned, Y discarded for missing links, Z discarded for dealbreakers, N excluded (already in queue)."
 
 If fewer than the target count pass all gates, say so explicitly rather than padding.
 
 ### Step 6 — Queue handoff
 After presenting the list, ask: "Any you want to flag for the apply queue?"
 
-If the user names IDs (e.g., "2, 5, 6" or "upwork-20260419-01"), write those entries to the Notion Flagged Jobs database via `notion-job-search` MCP. Do not remove them from the result set.
+If the user names IDs, write those entries to the Notion Flagged Jobs database via `notion-job-search` MCP.
 
 ---
 
 ## Search keyword strategy
 
-Run 4–6 of these per session. Mix primary and secondary clusters. Rotate across sessions to avoid staleness.
+**PRIMARY niche — Notion workspace builder (Phase 1 confirmed golden goose, run every session first):**
+Volume confirmed at ~12–15 relevant listings/week. Use the notion-proposal-skeleton for these.
+- `notion claude`
+- `notion automation workflow`
+- `notion workspace design`
+- `notion migration training`
+- `notion systems builder`
 
-**Primary cluster — Claude ecosystem (highest differentiator, run every session)**
+**PRIMARY cluster — Claude ecosystem (high differentiator, run every session):**
 - `claude mcp`
 - `claude cowork`
 - `claude onboarding`
 - `claude training`
-- `notion claude`
 - `ai workshop facilitator`
 
-**Secondary cluster — training/facilitation**
+**Secondary cluster — training/facilitation:**
 - `ai upskilling`
 - `ai trainer corporate`
 - `chatgpt workshop`
 - `ai tools training`
 - `llm training`
 
-**Secondary cluster — no-code/workflow tools**
-- `notion automation workflow`
-- `n8n workflow`
-- `zapier automation`
-- `airtable automation`
-- `notion systems builder`
-
-**Secondary cluster — health/ops angle**
+**Secondary cluster — health/ops angle:**
 - `health data automation`
 - `clinical workflow automation`
-- `medical ops automation`
 
 **Keywords to actively filter out or skip:**
 - `ai workflow automation` — skews heavily toward GoHighLevel/CRM generalists
-- `gohighlevel` — scope mismatch, no competitive edge
-- `LLM pipeline` — skews toward engineering builds requiring deep coding
+- `gohighlevel` — scope mismatch
+- `LLM pipeline` — skews toward engineering builds
 
 ---
 
 ## Defaults
 
 - Return 10 jobs unless otherwise specified.
-- Default priority when surfacing: `medium`. Upgrade to `high` only if the job has a strong specific match to a portfolio item, a strategy priority, or explicitly mentions Claude/Cowork/MCP.
+- Default priority when surfacing: `medium`. Upgrade to `high` only if strong specific match.
 - Marginal dealbreakers: discard by default.
 
 ## Standing rules (non-negotiable)
 
+- Step 0 (queue read + exclusion set) runs before any search. No exceptions.
 - Every surfaced job has a fixed live link to the specific posting.
 - Every surfaced job has been checked against the strategy's dealbreakers.
 - Every surfaced job uses the canonical listing format.
-- Never invent a link, pay range, or posted date. If any required field is unknown, state so in the Notes field.
+- Never invent a link, pay range, or posted date.
 - Queue writes go to Notion, not to git files.
 
 ## Completion condition
