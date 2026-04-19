@@ -70,37 +70,81 @@ Do not run before the user has acknowledged the action list.
 
 ---
 
-### Sub-step A — Setup (MANDATORY — no draft begins without completing this step visibly)
+### Sub-step A — Style Profile Extraction (MANDATORY HARD GATE)
+
+This step runs BEFORE the outline and BEFORE any draft text.
+No draft begins until the STYLE PROFILE block is written and visible in the response.
 
 Load process/cover-letter-style-guide.md and all files in process/writing-samples/.
-Filter samples by channel and job_type tags that match this listing.
-Identify the 2 samples with the closest match.
+Select the 2 samples whose channel and job_type tags most closely match this listing.
+Run a dedicated extraction pass on those samples — do not skip to generation.
 
-**Before writing a single word of draft, output a SEEDS block in this exact format:**
+Output this block in full before proceeding:
 
 ```
-SEEDS (from [sample filename] + [sample filename])
-structural: [one structural pattern — how they open, how they close, paragraph rhythm]
-s1: "[exact quoted sentence from sample 1]"
-s2: "[exact quoted sentence from sample 1 or 2]"
-s3: "[exact quoted sentence from sample 1 or 2]"
-register: [architect / coach / hybrid — and why]
+STYLE PROFILE (from [sample 1 filename] + [sample 2 filename])
+
+sentence rhythm:
+  [describe avg sentence length, variation pattern, whether short punches appear,
+  any notable burstiness — e.g. "declaratives run 8-14 words; occasional 2-4 word
+  punches after longer setup sentences"]
+
+paragraph structure:
+  [how paragraphs open, how they close, how they connect to the next one,
+  typical paragraph length in sentences]
+
+voice markers:
+  [specific recurring moves — e.g. "opens on client's situation not self;
+  questions embedded mid-body not saved for close; never names a credential
+  without immediately connecting it to client's problem"]
+
+vocabulary register:
+  [formality level, field terms present, what's conspicuously absent,
+  any phrases or constructions that recur]
+
+hook pattern:
+  [exact structural description of how the closest sample opens —
+  quote the first sentence verbatim, then describe its structure]
+
+banned phrases confirmed absent:
+  [run the style guide never-do list against the samples; note any that appeared
+  so they can be avoided in the draft too]
+
+register: [architect / coach / hybrid]
+reason: [one sentence on why, tied to this specific job type]
 ```
 
-Do not proceed to Sub-step B until this block is written and visible.
-This is a hard gate. No exceptions.
+Do not write the outline or draft until this block exists in the response.
+This is a hard gate. Quoting three sentences is not sufficient — all six fields above must be completed.
 
 ---
 
-### Sub-step B — Outline
+### Sub-step B — Plan
 
-Using the description audit (Step 1), the style guide's default structure, and any
-explicit asks in the listing, produce a short outline (5–8 bullets):
+Before writing the outline, output a PLAN block:
 
-- Who I am (one line, from the voice in the samples — not a credential list)
-- My read on who they are and what they need (one line, specific to this listing)
-- Why I'm a fit (2–3 bullets mapping profile to listing needs, not generic strengths)
-- Direct address of anything the listing explicitly says to include
+```
+PLAN
+- samples seeding from: [filenames]
+- style markers I will apply: [list 3-4 specific items from the profile above]
+- opening move: [describe the specific first-sentence structure, not the content]
+- proof anchor: [which portfolio item or experience, and why this one not others]
+- what the listing explicitly asks for that must appear: [list verbatim]
+- what I will not include: [anything tempting but off-register or irrelevant]
+```
+
+Do not proceed until the PLAN block is written.
+
+---
+
+### Sub-step C — Outline
+
+Using the description audit (Step 1), the style profile (Sub-step A), the plan (Sub-step B), and any explicit asks in the listing, produce a short outline (5-8 bullets):
+
+- Opening move (from the hook pattern in the style profile)
+- Bridge (connect writer to this specific problem — one move, not two)
+- Proof anchor (named specifically)
+- Specifics (what the listing explicitly asked for)
 - Close / next step
 
 Show the outline. Ask: "Draft from this outline, or adjust first?"
@@ -108,65 +152,67 @@ Do not proceed until confirmed.
 
 ---
 
-### Sub-step C — Draft (two-stage, not single-pass)
+### Sub-step D — Draft (two-stage, not single-pass)
 
 **Stage 1 — Seeded draft**
 
-Every paragraph must trace back to at least one seed from the SEEDS block.
-Write draft 1 using this rule strictly — amalgamation from samples, not generation from scratch.
+Every paragraph must trace back to at least one named style marker from the STYLE PROFILE block.
+Amalgamation from samples — not generation from scratch.
 
 Open with a sentence that could only apply to this specific listing.
-If you cannot write one that is truly specific, flag it and ask for a detail.
+If you cannot write one that is truly specific, stop, flag it, and ask for a detail.
 
 **Stage 2 — Voice lock pass (run before presenting draft)**
 
-Immediately after drafting, rewrite for voice. Check each item and fix before showing the draft:
+Immediately after drafting, check each item and fix before showing anything:
 
-- Scan every sentence. Flag any over 25 words. Shorten or split.
-- Remove any em dash used as punctuation (—). Rewrite the sentence. This means ALL em dashes — not just obvious ones. Scan character by character if needed.
+- Scan every sentence. Any over 25 words: shorten or split.
+- Search the entire draft for the character "—". If found anywhere: rewrite that sentence. No exceptions.
+- Remove any sweeping evaluative claim about a field or practice that the writer has no standing to make. If a general observation is needed, rewrite it grounded in a specific experience.
 - Remove bureaucratic transitions ("Furthermore," "In addition," "It is worth noting").
 - Remove credential-listing structure ("I have X years of experience in Y and Z"). Reframe as a specific claim tied to this client's need.
-- Check word count. Upwork proposals: 150–250 words unless client explicitly asks for more. Flag if over.
+- Check word count. Upwork proposals: 150-250 words unless client explicitly asks for more. Flag if over.
 
-Do not present the draft until Stage 2 is fully complete and violations are fixed, not just noted.
+Do not present the draft until Stage 2 is fully complete and all violations are fixed, not noted for later.
 
 ---
 
-### Sub-step D — Self-review (structured, not open-ended)
+### Sub-step E — Self-review (structured, not open-ended)
 
-Run this checklist. For each item, produce a scored result — do not assert compliance
-without evidence. Quote the line if a violation exists.
-
-CHECKLIST — run before presenting draft 1
+Run this checklist before presenting the draft. Score each item. Quote the line if a violation exists.
 
 [] Listing "please include" items
-→ List each item from the listing. For each: ADDRESSED / MISSING + quote from draft showing where.
+-> List each item from the listing. For each: ADDRESSED / MISSING + quote from draft showing where.
 
 [] Voice consistency
-→ Quote one sentence from the closest writing sample.
-Quote the most similar sentence in the draft.
-Score similarity 1–5. If score < 4, rewrite the draft sentence before proceeding.
+-> Quote one sentence from the closest writing sample.
+   Quote the most similar sentence in the draft.
+   Score similarity 1-5. If score < 4: rewrite the draft sentence before proceeding.
 
 [] "Never do" violations
-→ For each item in the style guide's "never do" list: FOUND / CLEAR.
-If FOUND: quote the offending phrase and rewrite it before proceeding.
+-> For each item in the style guide's "never do" list: FOUND / CLEAR.
+   If FOUND: quote the phrase, rewrite it, show the rewrite.
 
 [] Em dash scan
-→ Search the draft for the character "—". If found anywhere: FAIL. Rewrite before proceeding.
-Hyphens in compound modifiers (non-technical, mixed-skill) are acceptable. Em dashes are not.
+-> State: "Searched draft for character —." FOUND / CLEAR.
+   If FOUND anywhere: FAIL. Rewrite before proceeding.
+
+[] Sweeping claim scan
+-> State: "Checked for evaluative claims about field/practice." FOUND / CLEAR.
+   If FOUND: quote and rewrite.
 
 [] Length check
-→ State the word count. State the channel limit. Flag if over.
+-> State the word count. State the channel limit. Flag if over.
 
 [] Opening sentence test
-→ Is the first sentence specific to this listing? Could it appear in a different cover letter without editing?
-If yes: rewrite it before proceeding.
+-> Quote the first sentence. Could it appear in a different cover letter without editing?
+   If yes: rewrite before proceeding.
 
-After checklist: revise in place, then present draft 1 with checklist scores inline.
+After checklist: revise in place. Then present the draft with checklist scores inline.
 
 ---
 
-### Sub-step E — Format flex
+### Sub-step F — Format flex
 
 If the listing requires separate field answers rather than one letter, and the user
 requests this: parse the revised draft into separate answers keyed verbatim to each
@@ -176,7 +222,7 @@ question. Preserve the voice from the draft — do not rewrite tone when splitti
 
 ### Defaults
 
-- Multiple jobs submitted at once: run Steps 1–4 for all in a compact table, then
+- Multiple jobs submitted at once: run Steps 1-4 for all in a compact table, then
   Step 5 one job at a time, highest fit first.
 - No cover letter required + strong fit: skip to specific deliverables from Step 4.
 - Step 3 returns "skip": say so clearly and stop. Do not proceed to Step 4 unless
@@ -186,14 +232,13 @@ question. Preserve the voice from the draft — do not rewrite tone when splitti
 
 ### Standing rules
 
-- Never draft before Sub-step A SEEDS block is written and visible.
-- Never present a draft that has not completed the Stage 2 voice lock pass.
-- Never present a draft that has not passed the Sub-step D checklist with all violations fixed.
-- When drawing from the samples bank, prefer samples with matching channel and
-  closest job_type. The seeds you pull must be quoted in the SEEDS block — borrowing must be visible.
+- STYLE PROFILE block must appear before outline, plan, or draft. No exceptions.
+- PLAN block must appear before outline. No exceptions.
+- Never present a draft that has not completed the Stage 2 voice lock pass with all violations fixed.
+- Never present a draft that has not passed the Sub-step E checklist with all violations fixed.
+- Style profile extraction is a discrete pass on the samples — not background inference.
+  All six fields must be populated from actual sample evidence, not assumed.
 - Voice follows the style guide. Do not invent new conventions.
-- Do not use the style guide as background context. Treat its voice excerpts as
-  active constraints at the sentence level during Stage 2.
 
 ---
 
