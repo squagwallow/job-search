@@ -1,7 +1,7 @@
 project_slug: job-search
 doc_type: sop
-updated_at: 2026-04-17
-url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/process/prepare-application-prompt.md
+updated_at: 2026-04-19
+url: https://raw.githubusercontent.com/squagwallow/job-search/v1-notion-mcp/process/prepare-application-prompt.md
 
 # Prompt — Prepare Application Materials
 
@@ -70,12 +70,25 @@ Do not run before the user has acknowledged the action list.
 
 ---
 
-### Sub-step A — Setup
+### Sub-step A — Setup (MANDATORY — no draft begins without completing this step visibly)
 
-Load process/cover-letter-style-guide.md and process/writing-samples/.
-Filter writing samples by channel and job_type tags that match this listing.
-Identify the 2–3 samples with the closest match. Hold them in context — you will
-pull from them directly in Sub-step C.
+Load process/cover-letter-style-guide.md and all files in process/writing-samples/.
+Filter samples by channel and job_type tags that match this listing.
+Identify the 2 samples with the closest match.
+
+**Before writing a single word of draft, output a SEEDS block in this exact format:**
+
+```
+SEEDS (from [sample filename] + [sample filename])
+structural: [one structural pattern — how they open, how they close, paragraph rhythm]
+s1: "[exact quoted sentence from sample 1]"
+s2: "[exact quoted sentence from sample 1 or 2]"
+s3: "[exact quoted sentence from sample 1 or 2]"
+register: [architect / coach / hybrid — and why]
+```
+
+Do not proceed to Sub-step B until this block is written and visible.
+This is a hard gate. No exceptions.
 
 ---
 
@@ -99,61 +112,57 @@ Do not proceed until confirmed.
 
 **Stage 1 — Seeded draft**
 
-Before writing, extract from the filtered samples:
-- 3–5 sentence-level moves that match the target register (rhythm, directness,
-  specificity level). Quote them as: [seed: "..."]
-- Any structural patterns (how they open, how they close) that fit this job type.
+Every paragraph must trace back to at least one seed from the SEEDS block.
+Write draft 1 using this rule strictly — amalgamation from samples, not generation from scratch.
 
-Then write draft 1 using this rule: every paragraph must trace back to at least one
-seed phrase or structural move. This is amalgamation from samples, not generation
-from scratch.
+Open with a sentence that could only apply to this specific listing.
+If you cannot write one that is truly specific, flag it and ask for a detail.
 
-Open with a sentence that could only apply to this specific listing — not a general
-opener. If you cannot write one, flag it and ask for a detail.
+**Stage 2 — Voice lock pass (run before presenting draft)**
 
-**Stage 2 — Voice lock pass (before self-review)**
+Immediately after drafting, rewrite for voice. Check each item and fix before showing the draft:
 
-Immediately after drafting, rewrite for voice:
-- Scan for any sentence longer than 25 words. Shorten or split it.
-- Replace any transition that reads as bureaucratic (e.g., "Furthermore," "In
-  addition," "It is worth noting") with the move made in the closest sample.
-- Confirm no em dashes are present. If any exist, rewrite those sentences now.
-- Confirm no credential-listing structure (e.g., "I have X years of experience
-  in Y and Z"). Reframe as a specific claim tied to this client's need.
+- Scan every sentence. Flag any over 25 words. Shorten or split.
+- Remove any em dash used as punctuation (—). Rewrite the sentence. This means ALL em dashes — not just obvious ones. Scan character by character if needed.
+- Remove bureaucratic transitions ("Furthermore," "In addition," "It is worth noting").
+- Remove credential-listing structure ("I have X years of experience in Y and Z"). Reframe as a specific claim tied to this client's need.
+- Check word count. Upwork proposals: 150–250 words unless client explicitly asks for more. Flag if over.
 
-Do not present the draft until Stage 2 is complete.
+Do not present the draft until Stage 2 is fully complete and violations are fixed, not just noted.
 
 ---
 
 ### Sub-step D — Self-review (structured, not open-ended)
 
 Run this checklist. For each item, produce a scored result — do not assert compliance
-without evidence. If a violation exists, quote the line.
+without evidence. Quote the line if a violation exists.
+
 CHECKLIST — run before presenting draft 1
 
 [] Listing "please include" items
-→ List each item from the listing. For each: ADDRESSED / MISSING + quote.
+→ List each item from the listing. For each: ADDRESSED / MISSING + quote from draft showing where.
 
 [] Voice consistency
-→ Pick the single closest writing sample. Quote one sentence from the sample.
-Quote the most similar sentence in the draft. Score similarity 1–5.
-If score < 4, rewrite the draft sentence before proceeding.
+→ Quote one sentence from the closest writing sample.
+Quote the most similar sentence in the draft.
+Score similarity 1–5. If score < 4, rewrite the draft sentence before proceeding.
 
 [] "Never do" violations
 → For each item in the style guide's "never do" list: FOUND / CLEAR.
-If FOUND: quote the offending phrase and rewrite it now.
+If FOUND: quote the offending phrase and rewrite it before proceeding.
+
+[] Em dash scan
+→ Search the draft for the character "—". If found anywhere: FAIL. Rewrite before proceeding.
+Hyphens in compound modifiers (non-technical, mixed-skill) are acceptable. Em dashes are not.
 
 [] Length check
-→ State the word count. State the channel limit (Upwork proposals: ~150–250 words
-unless client explicitly asks for more). Flag if over.
+→ State the word count. State the channel limit. Flag if over.
 
 [] Opening sentence test
-→ Is the first sentence specific to this listing? Could it appear in a different
-cover letter without editing? If yes: rewrite it.
+→ Is the first sentence specific to this listing? Could it appear in a different cover letter without editing?
+If yes: rewrite it before proceeding.
 
-
-After checklist, revise in place. Then present draft 1 with checklist scores inline
-so the user can see what was caught.
+After checklist: revise in place, then present draft 1 with checklist scores inline.
 
 ---
 
@@ -177,11 +186,11 @@ question. Preserve the voice from the draft — do not rewrite tone when splitti
 
 ### Standing rules
 
-- Never draft before Steps 1–4 are complete.
-- Never skip the deliverables audit in Step 1.
+- Never draft before Sub-step A SEEDS block is written and visible.
+- Never present a draft that has not completed the Stage 2 voice lock pass.
+- Never present a draft that has not passed the Sub-step D checklist with all violations fixed.
 - When drawing from the samples bank, prefer samples with matching channel and
-  closest job_type. Quote the seeds you're pulling from — make the borrowing
-  visible, not implicit.
+  closest job_type. The seeds you pull must be quoted in the SEEDS block — borrowing must be visible.
 - Voice follows the style guide. Do not invent new conventions.
 - Do not use the style guide as background context. Treat its voice excerpts as
   active constraints at the sentence level during Stage 2.
@@ -193,4 +202,3 @@ question. Preserve the voice from the draft — do not rewrite tone when splitti
 User has, for each job: a full picture of what's required, an honest fit read, a
 clear strategy, and a prioritized action list — with drafts produced on request
 after the list is acknowledged.
-
