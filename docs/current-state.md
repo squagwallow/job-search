@@ -30,10 +30,12 @@ url: https://raw.githubusercontent.com/squagwallow/job-search/v1-notion-mcp/docs
 - Notion queue synced: 8 jobs reviewed, 5 updated (05 canned, 03 apply, 04 corrected, 07 skip, 02 skip)
 - Upwork profile headline updated (Notion added), overview updated, skills reordered
 - Corporate upskilling proposal (03) drafted and submitted
-- Notion architecture case study: built and live at https://curious-sunshine-0eeed4.netlify.app/
+- Spinwheel case study (Notion workspace design & AI integration) — built and live at https://curious-sunshine-0eeed4.netlify.app/
+- Spinwheel added to upwork/portfolio.md
 
 ## In Progress
 - Upwork proposal velocity: skeleton ready, search + send 5 proposals is next action
+- Add Spinwheel to Upwork profile (portfolio item not yet added)
 
 ## Blocked
 - None
