@@ -57,7 +57,7 @@ Load based on explicit triggers, not open-ended relevance.
 - **`formats/writing-sample-format.md`** — Load when adding to or drawing from the writing samples catalog.
 - **Upwork silo (`upwork/*`)** — Load when the directive involves Upwork.
 - **`docs/upwork-income-strategy.md`** — Load in every Upwork session alongside the Upwork silo files.
-- **General-jobs silo (`general-jobs/*`)** — Load when the directive involves any non-Upwork job.
+- **General-jobs silo (`general-jobs/*`)** — Load when the directive involves any non-Upwork job. Note: this silo exists on `main` branch only — files must be ported to `v1-notion-mcp` before use.
 - **Notion: Flagged Jobs** — Load when the user references flagged/queued jobs or asks what's in the queue.
 - **Notion: Writing Samples** — Load when prepare-application flow requires writing sample selection.
 - **Encyclopedia: LLM Prompt & Context Design Principles** → https://elaborate-belekoy-9e0eef.netlify.app/llm-design-encyclopedia — Load only in revision mode when editing any prompt, trigger condition, or entry.md structure.
@@ -72,7 +72,7 @@ Load based on explicit triggers, not open-ended relevance.
 
 ## Notes Block
 
-Maintain a NOTES block in every reply. Update before writing the main response.
+Maintain a NOTES block at the END of every reply, after all main content.
 
 Update order: Prune obsolete items → Merge related points → Tighten for brevity → Add only what matters for the next turn.
 
@@ -86,6 +86,7 @@ NOTES·N
 ```
 
 Rules:
+- Place at the END of the response, never at the top.
 - Symbols carry the meaning — do not add label words ("Settled:", "Active:", etc.).
 - No horizontal rules, no bold, no bullet lists inside the block.
 - Keep the whole block to 4–6 lines. Prefer 4.
