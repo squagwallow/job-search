@@ -1,7 +1,7 @@
 project_slug: job-search
 doc_type: domain
-updated_at: 2026-04-17
-url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/process/cover-letter-style-guide.md
+updated_at: 2026-04-19
+url: https://raw.githubusercontent.com/squagwallow/job-search/v1-notion-mcp/process/cover-letter-style-guide.md
 
 # Cover Letter Style Guide
 
@@ -66,9 +66,8 @@ opportunity," "I have X years of experience."
 ## Channel-specific conventions
 
 ### Upwork proposals
-- Length: 250-450 words for most roles. Complex systems/architecture
-  roles can run longer if the extra length is all substance — every
-  paragraph doing work.
+- Length: 150-250 words. Complex systems/architecture roles can run
+  to 300 if every paragraph is doing work — but default short.
 - Headers: Only for complex multi-part proposals where the client
   needs to navigate. Default: flowing paragraphs, no headers.
 - Portfolio links: Reference by name ("Cornflower Health case study")
@@ -89,7 +88,7 @@ opportunity," "I have X years of experience."
   Harvard/NASEM for writing/research; facilitation background for
   training.
 - Default close: First name only. "Warmly" for coaching register.
-- Default length: 300-400 words.
+- Default length: 150-250 words.
 - Default rate posture: State the rate or price clearly and once.
   Don't apologize for it.
 
@@ -104,12 +103,23 @@ opportunity," "I have X years of experience."
   always pair with a specific question or CTA of your own.
 - Use jargon the client didn't use first.
 - Use dashes as punctuation (em dashes, en dashes). Rewrite the
-  sentence instead.
+  sentence instead. This applies to ALL em dashes in the final text,
+  not just "obvious" ones. Scan character by character before presenting.
 - Use common AI writing tropes: "leverage," "delve," "seamlessly,"
   "game-changer," "cutting-edge," "tailored," "it's worth noting,"
   "I'd be happy to," "certainly," "absolutely," "in today's
   fast-paced world," or any phrase that sounds like it was written
   by a model trying to sound professional.
+- Make sweeping evaluative claims about a field or practice that the
+  writer has no standing to make. Example of what not to write:
+  "Most AI training fails because it starts from what trainers know
+  how to teach rather than what employees actually need." This kind
+  of sentence presents a broad opinion as fact, signals AI generation,
+  and undermines the writer's credibility precisely when they are
+  trying to establish expertise. If a general observation is needed,
+  ground it in a specific experience: "In the sessions I've run,
+  the biggest obstacle wasn't the content — it was that the material
+  wasn't connected to tasks people actually do."
 
 ## Note on existing samples
 
