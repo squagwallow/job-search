@@ -1,9 +1,17 @@
 project_slug: job-search
 doc_type: entry
-updated_at: 2026-04-17
-url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/entry.md
+updated_at: 2026-04-19
+branch: v1-notion-mcp
+url: https://raw.githubusercontent.com/squagwallow/job-search/v1-notion-mcp/entry.md
 
-# job-search — Entry Document
+# job-search — Entry Document (v1)
+
+## Architecture
+This is the v1 architecture. Two layers:
+- **Git** (this repo, `v1-notion-mcp` branch) — orchestration, prompts, strategy, formats, profiles. Read via GitHub MCP.
+- **Notion** (`notion-job-search` integration) — active databases: job queue, writing samples catalog. Read/write via Notion MCP.
+
+When starting a session, load this entry doc first. Then load Notion databases on demand per the conditional loading rules below.
 
 ## Purpose
 A consolidated context layer for the user's job search. Centralizes profiles, strategy, writing samples, and a standard job format so any LLM session can be pointed at this doc and pick up the ongoing process without manual uploads or re-explanation.
@@ -19,6 +27,24 @@ Zero-friction workflow: load this entry doc, issue a directive ("do a job search
 ## Status Pointer
 Current state: `docs/current-state.md` · Latest handoff: top of `docs/handoff-log.md`
 
+## Notion Layer
+
+The following live in Notion, not git. Use the `notion-job-search` MCP integration for all reads and writes.
+
+| Database | Purpose | Load when |
+|---|---|---|
+| Flagged Jobs | Active job queue. All surfaced jobs, status tracking. | User references queue, asks what's flagged, or a job search session produces results to log. |
+| Writing Samples | Catalog of writing samples with tags and use-case metadata. | Prepare-application flow reaches cover letter or writing sample selection. |
+
+**Notion write protocol:**
+- All job queue additions and status updates go to Notion Flagged Jobs — never to git.
+- Writing sample additions go to Notion Writing Samples.
+- Operator confirms before any Notion write that changes more than one row.
+- Git files (strategy, prompts, formats) are never written to Notion.
+
+**Notion MCP server:** `notion-job-search`
+Scope: job-search workspace only. Do not search or query beyond the databases listed above.
+
 ## Required Reading — Conditional
 
 Load based on explicit triggers, not open-ended relevance.
@@ -28,18 +54,20 @@ Load based on explicit triggers, not open-ended relevance.
 - **`process/prepare-application-prompt.md`** — Load when the user wants to apply to, evaluate, or prepare materials for a specific job.
 - **`process/cover-letter-style-guide.md`** — Load when the prepare-application flow reaches a cover letter or application-question deliverable.
 - **`formats/job-listing-format.md`** — Load whenever surfacing, logging, or documenting any job.
-- **`formats/writing-sample-format.md`** — Load when adding to or drawing from the writing samples bank.
+- **`formats/writing-sample-format.md`** — Load when adding to or drawing from the writing samples catalog.
 - **Upwork silo (`upwork/*`)** — Load when the directive involves Upwork.
 - **`docs/upwork-income-strategy.md`** — Load in every Upwork session alongside the Upwork silo files.
 - **General-jobs silo (`general-jobs/*`)** — Load when the directive involves any non-Upwork job.
-- **`queue/flagged-jobs.md`** — Load when the user references flagged/queued jobs or asks what's in the queue.
+- **Notion: Flagged Jobs** — Load when the user references flagged/queued jobs or asks what's in the queue.
+- **Notion: Writing Samples** — Load when prepare-application flow requires writing sample selection.
 
 ## Standing Instructions
 
 - **Fixed link rule.** Every surfaced job must have a fixed, live link to the specific posting. No search pages, no aggregator URLs, no reconstructed links.
 - **Dealbreaker filter.** Check each listing against the relevant strategy doc's hard disqualifiers. Do not surface jobs that fail.
 - **Standard format.** Use the canonical job listing format for every job.
-- **Amalgamate, don't invent.** When producing cover letters or application responses, draw from the writing samples bank.
+- **Amalgamate, don't invent.** When producing cover letters or application responses, draw from the writing samples catalog.
+- **Notion scope.** Only query the databases listed in the Notion Layer section. Do not browse or search beyond them.
 
 ## Notes Block
 
@@ -88,11 +116,14 @@ Before executing any directive:
 
 ## Exit Protocol
 
-At session end: append an entry to `docs/handoff-log.md` and update `docs/current-state.md`. State snapshot only — no transcript, no rationale for settled decisions.
+At session end:
+1. Write any queue or catalog updates to Notion via `notion-job-search` MCP.
+2. Append an entry to `docs/handoff-log.md` and update `docs/current-state.md` in git.
+3. State snapshot only — no transcript, no rationale for settled decisions.
 
-**Committing changes to the repo — default sequence:**
+**Committing git changes — default sequence:**
 
-1. Check whether a GitHub MCP connector is available in the current session. If yes, use it to push all changed files directly and confirm the commit.
+1. Check whether a GitHub MCP connector is available in the current session. If yes, use it to push all changed files directly to the `v1-notion-mcp` branch and confirm the commit.
 2. If no GitHub connector is available, generate a downloadable folder containing all changed files at their correct repo paths. The user extracts this folder into the repo root and commits with `git add . && git commit -m "[session label]" && git push`.
 
-When generating the downloadable folder: include only files that changed this session. Preserve the exact directory structure (e.g., `upwork/profile.md`, `process/writing-samples/filename.md`). Output a manifest listing every file included and what changed.
+When generating the downloadable folder: include only files that changed this session. Preserve the exact directory structure. Output a manifest listing every file included and what changed.
