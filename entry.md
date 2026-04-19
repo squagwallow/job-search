@@ -72,30 +72,25 @@ Load based on explicit triggers, not open-ended relevance.
 
 ## Notes Block
 
-Maintain a THREAD NOTES block in every reply. Update before writing the main response.
+Maintain a NOTES block in every reply. Update before writing the main response.
 
-Update order:
-- Prune: Remove items that are obsolete or irrelevant.
-- Merge: Combine related points into one short clause.
-- Tighten: Rewrite for maximum brevity and clarity.
-- Add: Only add new items important for future turns.
+Update order: Prune obsolete items → Merge related points → Tighten for brevity → Add only what matters for the next turn.
 
 Format:
 ```
-THREAD NOTES (Turn N)
-✓ Settled: brief decisions, separated by · where possible
-→ Active: current tasks / work in progress (max 3 items)
-? Open: unresolved questions / forks (max 5 items)
-Δ Meta: optional constraints/observations (omit line when empty)
+NOTES·N
+✓ [settled decisions, separated by ·]
+→ [active tasks, max 3]
+? [open questions, max 5]
+Δ [meta/constraints — omit line if empty]
 ```
 
 Rules:
-- Always update THREAD NOTES first, then write main reply.
-- Keep the block as short as possible while still accurate.
-- Prefer deleting and merging over letting it grow.
-- No emojis, bold, markdown headings, or bullet lists inside THREAD NOTES.
-- Use inline separators (·) instead of extra line breaks.
-- When Turn N > 20, be extra aggressive about pruning; consider suggesting thread rotation.
+- Symbols carry the meaning — do not add label words ("Settled:", "Active:", etc.).
+- No horizontal rules, no bold, no bullet lists inside the block.
+- Keep the whole block to 4–6 lines. Prefer 4.
+- Use · to merge related items inline rather than adding lines.
+- When Turn N > 20, suggest thread rotation.
 
 ## Revision Mode
 
