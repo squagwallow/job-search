@@ -36,6 +36,66 @@ Append-only, reverse chronological. Most recent entry on top.
 
 ---
 
+## 2026-04-19 — Search, queue sync, process rebuild, proposal 03, Notion niche setup
+
+### Current Status
+Full working session. Job search run with Playwright. Queue synced. All three process docs updated. One proposal submitted (03 — corporate upskilling). Notion workspace niche targeted as primary golden goose lane. Profile updated. Notion skeleton and case study prompt ready. Next session: Notion niche search + send 5 proposals.
+
+### Completed This Session
+- Playwright job search: 5 keyword passes, ~45 listings reviewed, 3 high-priority surfaced
+- Notion queue pulled and synced (8 jobs): 05 canned, 03 apply, 04 corrected, 07 skip, 02 skip
+- upwork/strategy.md: delivery capability filter added, scope realism, Phase 1 pattern update
+- job-search-prompt.md: Playwright as primary tool, keyword strategy updated, GoHighLevel excluded
+- prepare-application-prompt.md: SEEDS block replaced with structured 6-field style profile extraction; PLAN step added before outline; Sub-step D expanded with sweeping-claim check and em dash scan as named items
+- cover-letter-style-guide.md: sweeping-claim prohibition with worked example added; length fixed to 150-250 words; em dash rule hardened
+- entry.md: notes block moves to END of each response
+- process/notion-proposal-skeleton.md created: 4 swap zones, 2 pre-written portfolio hooks, usage rules
+- Writing sample added: 2026-04-19-upwork-corporate-ai-upskilling.md
+- Proposal 03 (AI Trainer & Upskilling Consultant) drafted by user, edited by LLM, submitted
+- Volume analysis: Notion niche confirmed as highest-volume deliverable golden goose lane (~12-15 relevant listings/week)
+- Profile updated: headline now includes Notion, overview sentence added, skills reordered
+- Cornflower Health v2 Notion architecture doc identified in Drive — case study source material
+- Case study write-up prompt prepared for new thread
+- Session v1 branch erroneously created during session — not used
+
+### Decisions Made (Carry Forward)
+- Notion workspace builder is the primary Phase 1 golden goose niche
+- Playwright is the required search tool; web search is fallback only
+- Style profile extraction (6 named fields) is mandatory before any draft — not informal seed quotes
+- PLAN block is mandatory before outline — both must be visible before draft begins
+- No draft may be presented without Stage 2 voice lock pass completed and violations fixed
+- Sweeping evaluative claims about a field are prohibited (added to style guide with example)
+- Proposal velocity target: 5 proposals per Notion niche search session using skeleton
+- For complex proposals (4+ explicit deliverables), user drafts and LLM edits — not LLM-generated
+- General-jobs silo exists on main branch only; needs porting to v1-notion-mcp before use
+- Mpathic2 careers page identified as strong general-jobs target (mental health + AI safety angle)
+
+### Blockers / Open Questions
+- Notion architecture case study: in progress in separate thread
+- Proposal 03 (upskilling): submitted, no response yet
+- Queue items 04 (Notion migration), 06 (Claude+Marketing), 08 (AI Business Teacher): still active, no proposals sent
+- Encyclopedia portfolio item: still needs Netlify hosting
+
+### Next Action
+New thread. Load entry doc. Run Playwright search on `notion claude` and `notion automation workflow`. Fill skeleton for each listing that has a clear swap A. Send 5 proposals.
+
+### Required Reading for Next Session
+- entry.md (v1-notion-mcp branch) — always
+- upwork/strategy.md — always
+- process/notion-proposal-skeleton.md — load for any Notion niche search session
+- Notion: Flagged Jobs — check queue before searching
+- process/writing-samples/ — load 2 closest samples before any proposal draft
+
+### Do Not Repeat
+- LLM generating proposals from scratch without style profile extraction and PLAN step
+- Skipping the Sub-step D checklist before presenting a draft
+- Using the SEEDS block format (3 quoted sentences) — replaced by 6-field structured profile
+- Navigating to individual Upwork listings before batch-evaluating from snippets
+- Keyword 'ai workflow automation' — GoHighLevel-heavy, not a fit
+- Erroneously creating new git branches during a working session
+
+---
+
 ## 2026-04-19 — v1 architecture deployment on v1-notion-mcp branch
 
 ### Current Status
