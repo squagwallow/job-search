@@ -129,4 +129,68 @@ Do not present the draft until Stage 2 is complete.
 
 Run this checklist. For each item, produce a scored result — do not assert compliance
 without evidence. If a violation exists, quote the line.
+CHECKLIST — run before presenting draft 1
+
+[] Listing "please include" items
+→ List each item from the listing. For each: ADDRESSED / MISSING + quote.
+
+[] Voice consistency
+→ Pick the single closest writing sample. Quote one sentence from the sample.
+Quote the most similar sentence in the draft. Score similarity 1–5.
+If score < 4, rewrite the draft sentence before proceeding.
+
+[] "Never do" violations
+→ For each item in the style guide's "never do" list: FOUND / CLEAR.
+If FOUND: quote the offending phrase and rewrite it now.
+
+[] Length check
+→ State the word count. State the channel limit (Upwork proposals: ~150–250 words
+unless client explicitly asks for more). Flag if over.
+
+[] Opening sentence test
+→ Is the first sentence specific to this listing? Could it appear in a different
+cover letter without editing? If yes: rewrite it.
+
+
+After checklist, revise in place. Then present draft 1 with checklist scores inline
+so the user can see what was caught.
+
+---
+
+### Sub-step E — Format flex
+
+If the listing requires separate field answers rather than one letter, and the user
+requests this: parse the revised draft into separate answers keyed verbatim to each
+question. Preserve the voice from the draft — do not rewrite tone when splitting.
+
+---
+
+### Defaults
+
+- Multiple jobs submitted at once: run Steps 1–4 for all in a compact table, then
+  Step 5 one job at a time, highest fit first.
+- No cover letter required + strong fit: skip to specific deliverables from Step 4.
+- Step 3 returns "skip": say so clearly and stop. Do not proceed to Step 4 unless
+  the user overrides.
+
+---
+
+### Standing rules
+
+- Never draft before Steps 1–4 are complete.
+- Never skip the deliverables audit in Step 1.
+- When drawing from the samples bank, prefer samples with matching channel and
+  closest job_type. Quote the seeds you're pulling from — make the borrowing
+  visible, not implicit.
+- Voice follows the style guide. Do not invent new conventions.
+- Do not use the style guide as background context. Treat its voice excerpts as
+  active constraints at the sentence level during Stage 2.
+
+---
+
+### Completion condition
+
+User has, for each job: a full picture of what's required, an honest fit read, a
+clear strategy, and a prioritized action list — with drafts produced on request
+after the list is acknowledged.
 
