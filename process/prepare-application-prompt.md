@@ -65,53 +65,68 @@ If any step is itself blocking ("video submission required — you must record b
 
 ## Cover-letter / application-question sub-workflow
 
-Runs inside Step 5 when a cover letter or question-response is an action item. Do not run before the user has acknowledged the action list.
+Runs inside Step 5 when a cover letter or question-response is an action item.
+Do not run before the user has acknowledged the action list.
+
+---
 
 ### Sub-step A — Setup
-Load `process/cover-letter-style-guide.md` and `process/writing-samples/` (filter by `channel` and `job_type` tags matching this listing).
+
+Load process/cover-letter-style-guide.md and process/writing-samples/.
+Filter writing samples by channel and job_type tags that match this listing.
+Identify the 2–3 samples with the closest match. Hold them in context — you will
+pull from them directly in Sub-step C.
+
+---
 
 ### Sub-step B — Outline
-Based on:
-- The description audit (Step 1)
-- The style guide's default structure
-- Anything the listing explicitly asks the cover letter to address
 
-Produce a short outline (5–8 bullets). Must include:
-- Who I am (one line)
-- My read on who they are and what they need (one line)
-- Why I'm a fit (2–3 bullets mapping profile → listing)
-- Explicit address of anything the listing says to include
+Using the description audit (Step 1), the style guide's default structure, and any
+explicit asks in the listing, produce a short outline (5–8 bullets):
+
+- Who I am (one line, from the voice in the samples — not a credential list)
+- My read on who they are and what they need (one line, specific to this listing)
+- Why I'm a fit (2–3 bullets mapping profile to listing needs, not generic strengths)
+- Direct address of anything the listing explicitly says to include
 - Close / next step
 
 Show the outline. Ask: "Draft from this outline, or adjust first?"
+Do not proceed until confirmed.
 
-### Sub-step C — Draft
-Write draft 1 from the outline. Pull phrasing and structural moves from the filtered writing samples — this is amalgamation, not from-scratch writing. Match the style guide's voice.
+---
 
-### Sub-step D — Self-review (before handing over)
-Before presenting draft 1, check against the style guide and the description:
-- Did I address every "please include" item from the listing?
-- Is the voice consistent with the samples I drew from?
-- Did I avoid anything flagged as "never do" in the style guide?
-- Is the length appropriate for the channel (Upwork proposals ≠ general cover letters)?
+### Sub-step C — Draft (two-stage, not single-pass)
 
-Revise in place. Then present draft 1.
+**Stage 1 — Seeded draft**
 
-### Sub-step E — Format flex
-If the listing requires each question in a separate field rather than one letter, and the user asks, parse the draft into separate answers keyed verbatim to each question.
+Before writing, extract from the filtered samples:
+- 3–5 sentence-level moves that match the target register (rhythm, directness,
+  specificity level). Quote them as: [seed: "..."]
+- Any structural patterns (how they open, how they close) that fit this job type.
 
-## Defaults
+Then write draft 1 using this rule: every paragraph must trace back to at least one
+seed phrase or structural move. This is amalgamation from samples, not generation
+from scratch.
 
-- If multiple jobs are submitted at once, run Steps 1–4 for all in a compact table, then Step 5 one job at a time starting with highest fit.
-- If a listing has no cover letter requirement and the fit is strong, skip directly from Step 4 to the specific deliverables.
-- If Step 3 returns "skip," say so clearly and stop. Do not proceed to Step 4 unless the user overrides.
+Open with a sentence that could only apply to this specific listing — not a general
+opener. If you cannot write one, flag it and ask for a detail.
 
-## Standing rules
+**Stage 2 — Voice lock pass (before self-review)**
 
-- Never draft a cover letter before Steps 1–4 are complete.
-- Never skip the deliverables audit in Step 1. Every application has one.
-- When drawing from the samples bank, prefer samples with matching channel and closest job_type.
-- Cover letter voice follows the style guide; do not invent new stylistic conventions.
+Immediately after drafting, rewrite for voice:
+- Scan for any sentence longer than 25 words. Shorten or split it.
+- Replace any transition that reads as bureaucratic (e.g., "Furthermore," "In
+  addition," "It is worth noting") with the move made in the closest sample.
+- Confirm no em dashes are present. If any exist, rewrite those sentences now.
+- Confirm no credential-listing structure (e.g., "I have X years of experience
+  in Y and Z"). Reframe as a specific claim tied to this client's need.
 
-## Completion condition
-User has, for each job: a full picture of what's required, an honest fit read, a clear strategy, and a prioritized action list — with drafts produced on request after the list is acknowledged.
+Do not present the draft until Stage 2 is complete.
+
+---
+
+### Sub-step D — Self-review (structured, not open-ended)
+
+Run this checklist. For each item, produce a scored result — do not assert compliance
+without evidence. If a violation exists, quote the line.
+
