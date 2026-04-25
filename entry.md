@@ -41,9 +41,10 @@ archive/                      # Deprecated orchestration prompts. Reference only
 ## When starting a session
 
 1. Read this file.
-2. Read the top entry of `docs/handoff-log.md` for current state and next action.
-3. Load only the silo and files relevant to the directive (Upwork → `upwork/*` + `docs/upwork-income-strategy.md`; general-jobs → `general-jobs/*`).
-4. Proceed.
+2. **If you are Claude (any surface — Claude Code, Claude.ai, Claude Desktop, claude-via-API): read `CLAUDE.md` before doing anything else.** It contains harness-specific behavior rules that override session defaults.
+3. Read the top entry of `docs/handoff-log.md` for current state and next action.
+4. Load only the silo and files relevant to the directive (Upwork → `upwork/*` + `docs/upwork-income-strategy.md`; general-jobs → `general-jobs/*`).
+5. Proceed.
 
 No conditional reading hierarchy. No revision mode. No no-directive default. Just point at the repo, load what's relevant for the task at hand, work.
 
@@ -131,4 +132,4 @@ State snapshot only. No transcript. No rationale for settled decisions (those go
 
 - Not a runtime. Don't try to "execute" the repo.
 - Not an agent. Don't expect the repo to surface jobs by itself; that's the human's daily ritual using saved searches and digests.
-- Not a single-LLM tool. Any model can read it. Claude-specific harness behavior (if any) lives in `CLAUDE.md`, not here.
+- Not a single-LLM tool. Any model can read it. Claude-specific harness behavior lives in `CLAUDE.md`, not here. Other models ignore that file.
