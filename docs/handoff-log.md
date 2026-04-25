@@ -1,11 +1,80 @@
 project_slug: job-search
 doc_type: handoff-log
-updated_at: 2026-04-19
-url: https://raw.githubusercontent.com/squagwallow/job-search/v1-notion-mcp/docs/handoff-log.md
+updated_at: 2026-04-25
+url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/docs/handoff-log.md
 
 # Handoff Log
 
 Append-only, reverse chronological. Most recent entry on top.
+
+---
+
+## 2026-04-25 — Repo audit, branch consolidation, orchestration layer archived
+
+### Current Status
+Eight-branch sprawl consolidated to `main` plus a safety archive tag. Old `main` (2026-04-17 baseline) preserved at `archive/pre-consolidation-2026-04-25`. Main now at SHA `3689ce0`, includes the full v1-notion-mcp content (Notion-niche pivot, populated general-jobs strategy and master profile, Spinwheel portfolio, hardened prompts) plus the orphan Vendasta writing sample, plus the orchestration-layer strip and entry.md rewrite. Repo is now a static documentation vault, not a runtime. LLM-driven agentic search and structured cover letter cascade are archived as failed experiments. Next sitting: build platform-native saved searches on Upwork, LinkedIn, Indeed; submit first proposals.
+
+### Completed This Session
+- Audit of all 8 branches and content drift between them
+- Tagged old main as `archive/pre-consolidation-2026-04-25` (safety net)
+- Fast-forwarded main to v1-notion-mcp (23 commits ahead)
+- Cherry-picked Vendasta writing sample from `claude/update-current-state-docs-2DuBu`
+- User deleted most redundant branches via web UI (some blocked as active; auto-cleanup will handle)
+- Moved 4 orchestration files to `archive/`: prompt-engineer-entry.md, job-search-prompt.md, prepare-application-prompt.md, notion-proposal-skeleton.md
+- Rewrote `entry.md` slim and model-agnostic: repo map, standing rules, notes block spec, handoff protocol pointer. Dropped conditional reading hierarchy, revision mode, no-directive default, Notion MCP layer description.
+- Rewrote `README.md` with docs-vault framing
+- Added `archive/README.md` explaining what was archived and when to revive
+- Action item list and 1-4 hour next-sitting plan produced (lives in this conversation; not yet committed as a file)
+
+### Decisions Made (Carry Forward)
+- Repo is a documentation vault, model-agnostic. Not a runtime, not single-LLM.
+- LLM-driven agentic search is archived. Job surfacing moves to platform-native saved searches and email digests on Upwork, LinkedIn, Indeed RSS.
+- Structured cover letter cascade is archived. Cover letter automation deprioritized; ad-hoc drafting until job surfacing is solid.
+- Make.com aggregator deferred to week 2-3, only if daily flow stable. Estimated 6-10 hour build, ~50% LLM-assistable.
+- Per-session branching policy: option 4A (manual override per session — user instructs each session to commit to main directly).
+- No CLAUDE.md for now. Add only if 4A proves unreliable.
+- Notes block and handoff protocol kept; live in `entry.md`. State management (handoff-log, decision-log, current-state, todo) is project memory, not orchestration.
+- Spinwheel/Cornflower/Job-search portfolio hooks remain in `archive/notion-proposal-skeleton.md` for reference; not active.
+- Daily ritual target: ~30 min, fixed time, capped duration. Bounded streams over open-ended browsing.
+- Proposal velocity target: 2-4 per day in early days; revisit after 7 days of digest data.
+
+### Blockers / Open Questions
+- Some redundant branches blocked from deletion (likely active state; user to retry later or rely on auto-cleanup)
+- Upwork search syntax in 2026: full nested boolean unconfirmed. User to test `"phrase" -exclusion` syntax in Upwork search bar before saving.
+- Queue-in-Notion-vs-markdown: still TBD. `queue/flagged-jobs.md` is the live file on main; the v1-notion-mcp Notion MCP integration was archived along with the orchestration layer. Decide once daily ritual is in motion.
+- Notes block destination: lives in `entry.md` for now. May migrate to a Claude Project system prompt or top-level Claude memory if/when daily flow shifts to a Claude Project.
+
+### Next Action
+Block 1 (~30 min — already done this session): repo cleanup, orchestration strip, entry.md rewrite. Done.
+
+Block 2 (~60-90 min, user solo): build saved searches.
+- Upwork: test syntax with `"notion workflow" -gohighlevel`. Build 4-5 narrow saved searches. Enable daily email notifications. Filters: min hourly $50, min fixed $200, payment-verified only.
+- LinkedIn: 3-4 saved searches by role cluster (Group Facilitator / AI Trainer / Pre-licensed Therapist / Behavioral Health). Filters: past 24 hours, Contract OR Part-time, Easy Apply OFF. Daily email alert on each.
+- Indeed: 2-3 search URLs with `&format=rss` appended; add to Feedly free tier.
+
+Block 3 (~30-60 min): first live triage. Run saved searches manually. Pick top 2-3 listings. Draft proposals manually using Spinwheel/Cornflower/Job-search hooks from `archive/notion-proposal-skeleton.md` for portfolio anchors. Submit. Log to `queue/flagged-jobs.md`.
+
+Block 4 (optional): same on LinkedIn.
+
+End-of-day target: 2-4 proposals submitted, search infrastructure live, repo clean.
+
+### Required Reading for Next Session
+- `entry.md` — always
+- `docs/handoff-log.md` (this entry) — always
+- `upwork/strategy.md` + `upwork/profile.md` + `upwork/portfolio.md` — when working on Upwork track
+- `general-jobs/strategy.md` + `general-jobs/master-profile.md` — when working on general-jobs track
+- `process/cover-letter-style-guide.md` + `process/writing-samples/` — only if drafting a cover letter
+- `archive/notion-proposal-skeleton.md` — reference only; portfolio hook language is reusable
+
+### Do Not Repeat
+- Creating new `claude/*` branches per session. Commit to main directly. User instructs every session start.
+- LLM-driven agentic job search. Use platform-native saved searches and email digests instead.
+- Structured cover letter cascade with PLAN block + SEEDS + checklist + voice-lock pass. Produces rigid drafts.
+- Conditional reading hierarchy in entry.md. Just point at the repo and load what's relevant.
+- Adding orchestration that the LLM is supposed to "execute" rather than reference.
+- Building Make.com or other automation before daily digest pattern proves working.
+
+---
 
 ## Entry format
 
