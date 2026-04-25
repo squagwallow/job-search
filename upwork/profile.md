@@ -1,6 +1,6 @@
 project_slug: job-search
 doc_type: domain
-updated_at: 2026-04-17
+updated_at: 2026-04-25
 url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/upwork/profile.md
 
 # Upwork Profile
@@ -9,7 +9,7 @@ url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/upwork/profile.md
 AI Workflow & Automation Architect | Health, Ops & LLM Systems
 
 ## Hourly rate
-$65.00/hr
+$85.00/hr
 
 ## Overview / summary
 I design, document, and oversee AI-powered workflows for health, service, and professional organizations. My focus is taking a messy operational problem, shaping it into a clear workflow, and then building a no-code + LLM system that your team can actually run and understand.

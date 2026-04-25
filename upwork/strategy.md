@@ -1,7 +1,7 @@
 project_slug: job-search
 doc_type: domain
-updated_at: 2026-04-19
-url: https://raw.githubusercontent.com/squagwallow/job-search/v1-notion-mcp/upwork/strategy.md
+updated_at: 2026-04-25
+url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/upwork/strategy.md
 
 # Upwork Strategy
 
@@ -104,7 +104,7 @@ Not in scope for Phase 1 (may reconsider in Phase 2 if hands-on experience devel
 
 ## Pay floor / rate posture
 
-Public profile rate: $65/hr (anchor — do not lower).
+Public profile rate: $85/hr (anchor — do not lower).
 
 Actual per-project flexibility:
 - Phase 1: price fixed projects attractively to win traction; effective
@@ -145,7 +145,7 @@ Client signals:
 - Intermediate or Expert experience level selected
 - Few open/idle contracts (client follows through)
 - Posted recently (within 7 days)
-- Avg hourly rate paid consistent with or above public rate ($65/hr)
+- Avg hourly rate paid consistent with or above public rate ($85/hr)
 
 Scope signals:
 - AI facilitation, training, or curriculum design as the core ask
