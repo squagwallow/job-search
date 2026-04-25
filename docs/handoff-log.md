@@ -12,18 +12,19 @@ Append-only, reverse chronological. Most recent entry on top.
 ## 2026-04-25 — Repo audit, branch consolidation, orchestration layer archived
 
 ### Current Status
-Eight-branch sprawl consolidated to `main` plus a safety archive tag. Old `main` (2026-04-17 baseline) preserved at `archive/pre-consolidation-2026-04-25`. Main now at SHA `3689ce0`, includes the full v1-notion-mcp content (Notion-niche pivot, populated general-jobs strategy and master profile, Spinwheel portfolio, hardened prompts) plus the orphan Vendasta writing sample, plus the orchestration-layer strip and entry.md rewrite. Repo is now a static documentation vault, not a runtime. LLM-driven agentic search and structured cover letter cascade are archived as failed experiments. Next sitting: build platform-native saved searches on Upwork, LinkedIn, Indeed; submit first proposals.
+Eight-branch sprawl consolidated to `main` plus a safety archive tag. Old `main` (2026-04-17 baseline) preserved at `archive/pre-consolidation-2026-04-25`. Main now at SHA `eba116f`, includes the full v1-notion-mcp content (Notion-niche pivot, populated general-jobs strategy and master profile, Spinwheel portfolio, hardened prompts) plus the orphan Vendasta writing sample, plus the orchestration-layer strip, entry.md rewrite, and CLAUDE.md harness rules. Repo is now a static documentation vault, not a runtime. LLM-driven agentic search and structured cover letter cascade are archived as failed experiments. All 8 redundant branches deleted. Next sitting: build platform-native saved searches on Upwork, LinkedIn, Indeed; submit first proposals.
 
 ### Completed This Session
 - Audit of all 8 branches and content drift between them
 - Tagged old main as `archive/pre-consolidation-2026-04-25` (safety net)
 - Fast-forwarded main to v1-notion-mcp (23 commits ahead)
 - Cherry-picked Vendasta writing sample from `claude/update-current-state-docs-2DuBu`
-- User deleted most redundant branches via web UI (some blocked as active; auto-cleanup will handle)
+- User deleted all 8 redundant branches via web UI: `v1`, `v1-notion-mcp`, six `claude/*` branches
 - Moved 4 orchestration files to `archive/`: prompt-engineer-entry.md, job-search-prompt.md, prepare-application-prompt.md, notion-proposal-skeleton.md
-- Rewrote `entry.md` slim and model-agnostic: repo map, standing rules, notes block spec, handoff protocol pointer. Dropped conditional reading hierarchy, revision mode, no-directive default, Notion MCP layer description.
+- Rewrote `entry.md` slim and model-agnostic: repo map, standing rules, notes block spec, handoff protocol pointer. Dropped conditional reading hierarchy, revision mode, no-directive default, Notion MCP layer description. Added "if you are Claude, read CLAUDE.md before anything else" pointer in session-start sequence.
 - Rewrote `README.md` with docs-vault framing
 - Added `archive/README.md` explaining what was archived and when to revive
+- Wrote `CLAUDE.md` (option 4B): branching policy (commit to main, no claude/* branches), commit hygiene, mass-edit pre-confirmation rules, tooling scope, pointer to entry.md for model-agnostic stuff
 - Action item list and 1-4 hour next-sitting plan produced (lives in this conversation; not yet committed as a file)
 
 ### Decisions Made (Carry Forward)
@@ -31,15 +32,13 @@ Eight-branch sprawl consolidated to `main` plus a safety archive tag. Old `main`
 - LLM-driven agentic search is archived. Job surfacing moves to platform-native saved searches and email digests on Upwork, LinkedIn, Indeed RSS.
 - Structured cover letter cascade is archived. Cover letter automation deprioritized; ad-hoc drafting until job surfacing is solid.
 - Make.com aggregator deferred to week 2-3, only if daily flow stable. Estimated 6-10 hour build, ~50% LLM-assistable.
-- Per-session branching policy: option 4A (manual override per session — user instructs each session to commit to main directly).
-- No CLAUDE.md for now. Add only if 4A proves unreliable.
-- Notes block and handoff protocol kept; live in `entry.md`. State management (handoff-log, decision-log, current-state, todo) is project memory, not orchestration.
+- Per-session branching policy: **option 4B**. `CLAUDE.md` at the repo root holds the standing rule "commit directly to main, do not create claude/* branches." Every Claude session reads it on startup. No more manual override needed.
+- Notes block and handoff protocol kept; live in `entry.md` (model-agnostic). State management (handoff-log, decision-log, current-state, todo) is project memory, not orchestration.
 - Spinwheel/Cornflower/Job-search portfolio hooks remain in `archive/notion-proposal-skeleton.md` for reference; not active.
 - Daily ritual target: ~30 min, fixed time, capped duration. Bounded streams over open-ended browsing.
 - Proposal velocity target: 2-4 per day in early days; revisit after 7 days of digest data.
 
 ### Blockers / Open Questions
-- Some redundant branches blocked from deletion (likely active state; user to retry later or rely on auto-cleanup)
 - Upwork search syntax in 2026: full nested boolean unconfirmed. User to test `"phrase" -exclusion` syntax in Upwork search bar before saving.
 - Queue-in-Notion-vs-markdown: still TBD. `queue/flagged-jobs.md` is the live file on main; the v1-notion-mcp Notion MCP integration was archived along with the orchestration layer. Decide once daily ritual is in motion.
 - Notes block destination: lives in `entry.md` for now. May migrate to a Claude Project system prompt or top-level Claude memory if/when daily flow shifts to a Claude Project.
@@ -60,6 +59,7 @@ End-of-day target: 2-4 proposals submitted, search infrastructure live, repo cle
 
 ### Required Reading for Next Session
 - `entry.md` — always
+- `CLAUDE.md` — always, if the session is Claude (any surface). Other models skip.
 - `docs/handoff-log.md` (this entry) — always
 - `upwork/strategy.md` + `upwork/profile.md` + `upwork/portfolio.md` — when working on Upwork track
 - `general-jobs/strategy.md` + `general-jobs/master-profile.md` — when working on general-jobs track
@@ -67,7 +67,7 @@ End-of-day target: 2-4 proposals submitted, search infrastructure live, repo cle
 - `archive/notion-proposal-skeleton.md` — reference only; portfolio hook language is reusable
 
 ### Do Not Repeat
-- Creating new `claude/*` branches per session. Commit to main directly. User instructs every session start.
+- Creating new `claude/*` branches per session. CLAUDE.md prohibits this; commit to main directly.
 - LLM-driven agentic job search. Use platform-native saved searches and email digests instead.
 - Structured cover letter cascade with PLAN block + SEEDS + checklist + voice-lock pass. Produces rigid drafts.
 - Conditional reading hierarchy in entry.md. Just point at the repo and load what's relevant.
