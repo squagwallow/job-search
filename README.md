@@ -1,8 +1,8 @@
 # job-search
 
-Personal context layer for agentic job search and application prep.
+Personal job-search documentation vault. Profile, strategy, portfolio, writing samples, and project state.
 
-This repo is designed to be loaded by an LLM at the start of any job-search session. Do not read it sequentially — the LLM navigates it by trigger condition from `entry.md`.
+Model-agnostic. Any LLM (Claude, ChatGPT, Perplexity, etc.) can be pointed at this repo and pick up the work. The repo is documentation, not a runtime.
 
 ## Entry URL
 
@@ -10,43 +10,39 @@ This repo is designed to be loaded by an LLM at the start of any job-search sess
 https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/entry.md
 ```
 
-Paste that URL into a fresh LLM thread to pick up the ongoing job-search process.
+Paste that URL into a fresh LLM thread to load the index. The session reads `entry.md`, then the top of `docs/handoff-log.md`, then whichever silo the task touches.
 
-## For humans
+## Daily use
 
-See [`docs/user-guide.md`](docs/user-guide.md) for trigger phrases, workflows, and a worked example of a full session.
-
-## For the LLM
-
-- [`entry.md`](entry.md) — conditional reading index, standing instructions, notes block spec, revision mode spec
-- [`prompt-engineer-entry.md`](prompt-engineer-entry.md) — orchestration index; load when auditing or refining the prompt base
-- [`docs/decision-log.md`](docs/decision-log.md) — settled decisions, carry forward
-- [`docs/handoff-log.md`](docs/handoff-log.md) — reverse-chron session state snapshots
+Job surfacing happens through saved searches and email digests on Upwork, LinkedIn, and Indeed RSS feeds. The repo is the strategy and identity layer the LLM session reads when evaluating listings or drafting application materials.
 
 ## Structure
 
 ```
-entry.md                          # Bootstrap — every session starts here
-prompt-engineer-entry.md          # Orchestration index for prompt audits
+entry.md                          # Index. Repo map, standing rules, notes block, handoff protocol.
 
 docs/
   current-state.md                # What's done / in progress / not started
   decision-log.md                 # Settled decisions
   handoff-log.md                  # Session state snapshots
   todo.md                         # Priority-ordered action list
-  user-guide.md                   # Human-facing how-to
+  upwork-income-strategy.md       # Income math, phase milestones, rate ladder
 
 formats/
   job-listing-format.md           # Canonical job record format
   writing-sample-format.md        # Cover letter / sample format
 
 process/
-  job-search-prompt.md            # SOP: surface jobs agentically
-  prepare-application-prompt.md   # SOP: audit → compare → fit → strategy → actions
   cover-letter-style-guide.md     # Voice, structure, channel conventions
-  writing-samples/                # Approved samples bank
+  writing-samples/                # Sample bank, tagged
 
 upwork/                           # Upwork silo (profile, portfolio, strategy)
-general-jobs/                     # Non-Upwork silo (LinkedIn, Indeed, resumes, strategy)
+general-jobs/                     # Non-Upwork silo (master profile, linkedin, indeed, strategy, resumes)
 queue/flagged-jobs.md             # Lightweight apply queue
+
+archive/                          # Deprecated orchestration prompts. Reference only.
 ```
+
+## What changed (2026-04-25)
+
+The repo was consolidated from 8 branches down to `main` plus a safety archive (`archive/pre-consolidation-2026-04-25`). The orchestration layer (conditional reading rules, agentic search prompt, structured cover letter cascade) was archived; LLM-driven agentic search degraded in quality and the structural cover letter prompt produced rigid drafts. Job surfacing moved to platform-native saved searches and email digests. The repo is now a static documentation vault.
