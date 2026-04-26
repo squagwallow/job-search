@@ -1,11 +1,80 @@
 project_slug: job-search
 doc_type: handoff-log
-updated_at: 2026-04-25
+updated_at: 2026-04-26
 url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/docs/handoff-log.md
 
 # Handoff Log
 
 Append-only, reverse chronological. Most recent entry on top.
+
+---
+
+## 2026-04-26 — Tier 0 surfacing workflow designed; bookmarklet + Claude Project architecture committed
+
+### Current Status
+Tier 0 job-search workflow designed end-to-end. Three new docs files written and committed: `docs/daily-use-prompt.md` (Claude Project system prompt template, two-stage scoring), `docs/saved-searches.md` (registry skeleton with 8 Upwork queries, 4 LinkedIn, 3 Indeed), `docs/extraction-bookmarklets.md` (per-platform JS bookmarklets that walk the DOM and copy markdown-formatted listings with links preserved to clipboard). Architecture: bookmarked Upwork URLs with `&sort=recency` plus extraction bookmarklet plus Claude Project with profile/strategy/samples loaded as project knowledge. No third-party services, no orchestration layer, no recurring cost. Plan file lives at `/root/.claude/plans/ok-yeah-im-not-harmonic-stream.md` (outside repo). All user-facing build steps remain (saved searches in each platform UI, Gmail filters, bookmarklet install, Claude Project creation). Surfacing has been the actual bottleneck (18 proposals in 12 days, time-to-find exceeds time-to-propose, dry past week) — Tier 0 directly targets this.
+
+### Completed This Session
+- Verified Upwork has NO per-saved-search email alert via UI walkthrough (Notification Settings → Messages tab and Email updates tab both lack saved-search controls). Earlier research that claimed otherwise was wrong; user was right.
+- Verified Upwork's "Save search" action does not preserve sort state; `&sort=recency` URL param is the only freshness mechanism.
+- Verified Upwork has no posted-in-last-N-days sidebar filter.
+- Confirmed Indeed RSS officially dead in 2026; native email alerts only path.
+- Wrote `docs/extraction-bookmarklets.md`: three bookmarklets (Upwork, LinkedIn, Indeed), each walks the DOM, extracts each tile to `## N. [title](url)` markdown with metadata bullets, copies to clipboard. Selectors are best-guess; first-use tuning expected. Includes failure modes table and Cmd-A fallback procedure.
+- Wrote `docs/daily-use-prompt.md`: full Claude Project system prompt for two-stage scoring (Gatekeeper binary FAIL/PASS on hard disqualifiers, Scorer JSON-table output with proposal_hook column drawing voice from project-knowledge writing samples). Lists project knowledge files to upload.
+- Wrote `docs/saved-searches.md`: registry of 8 Upwork searches (u1-u5 existing niche, u6-u8 new based on 2026-04-23 Upwork market trends email — AI Apps & Integration +27% globally, QA Testing +26%, Coaching +42%), 4 LinkedIn role clusters, 3 Indeed role clusters, plus Gmail filter spec. Build checklists per platform.
+- Updated `docs/current-state.md` to reflect Tier 0 design state and call out the strategic followup (niche review).
+
+### Decisions Made (Carry Forward)
+- Tier 0 surfacing architecture: bookmarked filtered URLs + per-platform extraction bookmarklets + Claude Project with project knowledge + two-stage scoring prompt. No services, no APIs, no recurring cost.
+- Upwork input source: bookmarked URLs with `&sort=recency` appended (NOT the Save-Search-with-email-alert path, which doesn't exist).
+- Extraction layer is a bookmarklet, not a browser extension. Selectors live in `docs/extraction-bookmarklets.md` and get tuned at first-use. Fallback when bookmarklet breaks: raw Cmd-A copy (links lost, but Tier-A surfacing still works).
+- Claude Project ("Job Search Daily Triage") is the only "runtime"; profile/strategy/portfolio/samples/style guide loaded as project knowledge; system prompt versioned in `docs/daily-use-prompt.md`.
+- 3 new Upwork searches (u6-u8) added 2026-04-26 to capture AI integration / AI testing / AI coaching demand growth from market trends email. Represents partial broadening from Notion-only Phase 1 narrowing.
+- Niche / strategy review is a SEPARATE followup session, not blocking Tier 0 build. Schedule after 1-2 weeks of daily-ritual data.
+
+### Blockers / Open Questions
+- Bookmarklet DOM selectors are best-guess. Will need first-use tuning via DevTools inspection on each platform (~10-15 min each).
+- LinkedIn email-alert filter respect not user-verified. If LinkedIn alerts surface jobs that ignore filters, pivot LinkedIn to bookmarklet+URL approach like Upwork.
+- Upwork search syntax: quoted phrases and `-keyword` confirmed; full nested boolean unconfirmed. Simplify queries if complex ones return empty.
+- Strategic question: is the Notion-narrow niche the right Phase 1 lane? 18 proposals / 12 days / 0 contracts is below target. New u6-u8 searches partially broaden. Worth a dedicated review session after Tier 0 produces data.
+
+### Next Action
+User punch list for the next sitting (~90 min total):
+
+1. Install bookmarklets (~10 min). In browser: create folder `JS-Extract` in bookmarks bar. Create three bookmarks (`Extract Upwork`, `Extract LinkedIn`, `Extract Indeed`). For each, paste the corresponding `javascript:...` line from `docs/extraction-bookmarklets.md` into the URL field. Save.
+
+2. Build Upwork searches and bookmarks (~30-40 min). For each row in `docs/saved-searches.md` Upwork table: build the search in Upwork's UI, apply global filters (Hourly $30+, Fixed $200+, Payment verified ON), click Save Search, then in the address bar append `&sort=recency`, then bookmark the resulting URL into folder `JS-Upwork`. Update the table in `docs/saved-searches.md` with each bookmarked URL. Test the bookmarklet on at least one Upwork tab — if it returns 0 jobs, follow the failure-mode table in `docs/extraction-bookmarklets.md` to tune selectors.
+
+3. Build LinkedIn saved searches and email alerts (~20 min). For each LinkedIn row in `docs/saved-searches.md`: build, save, enable daily email alert. Bookmark the URL too as a fallback. Update the table.
+
+4. Build Indeed email alerts (~10 min). Same pattern.
+
+5. Set up Gmail filters and labels (~10 min). Two filters per `docs/saved-searches.md` Gmail table: `JS-LinkedIn` and `JS-Indeed`, both with skip-inbox.
+
+6. Create Claude Project `Job Search Daily Triage` (~15 min). Upload all project knowledge files listed in `docs/daily-use-prompt.md`. Paste the fenced-block system prompt into the Project's instructions field. Save.
+
+7. Verification run (~10 min). Open one Upwork bookmark with `&sort=recency`. Click `Extract Upwork` bookmarklet. Paste clipboard into Claude Project. Verify output is a Tier A/B markdown table with preserved links and listing-specific proposal_hook column. Click a link in Claude's output to confirm it opens the right Upwork listing.
+
+8. First live proposals. From the verified Tier A list, pick 2-4 best-fit listings. For each, ask Claude in the Project: "Draft a proposal for [title] using the closest writing sample." Tighten and submit.
+
+### Required Reading for Next Session
+- `entry.md` — always
+- `CLAUDE.md` — always for Claude sessions
+- This handoff entry — always
+- `docs/saved-searches.md` — for the build steps
+- `docs/extraction-bookmarklets.md` — for bookmarklet install and selector tuning
+- `docs/daily-use-prompt.md` — for Claude Project setup
+- `upwork/strategy.md` + `upwork/profile.md` + `upwork/portfolio.md` — Upwork track context
+- `general-jobs/strategy.md` + `general-jobs/master-profile.md` — general-jobs track context
+- `process/cover-letter-style-guide.md` + `process/writing-samples/*` — only when drafting a proposal
+
+### Do Not Repeat
+- Asserting Upwork has per-saved-search filtered email alerts. It does not. Surfacing is via bookmarked URLs + bookmarklet, period.
+- Using Cmd-A raw copy as the primary extraction path. Links get stripped. Use the bookmarklet; Cmd-A is degraded fallback only.
+- Saving an Upwork search without appending `&sort=recency` to the URL afterward. Save Search alone produces Best-Match-sorted results that resurface old jobs.
+- Adding stack complexity (Make.com, n8n, Vollna, Apify, Supabase, Telegram bots) before Tier 0 is proven for 30 days.
+- Treating cover-letter automation as a project. Drafting happens ad-hoc in the Project on demand.
+- Re-running the niche debate before Tier 0 has produced 1-2 weeks of surfacing data.
 
 ---
 
