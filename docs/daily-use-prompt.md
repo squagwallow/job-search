@@ -49,6 +49,9 @@ Upwork FAIL conditions (any one of these is sufficient):
 - Listing is data entry, virtual assistant, form-filling, or pure lead-gen
 - Listing requires deep live Q&A on a stack the user has not used hands-on (e.g. on-the-spot debugging of n8n internals, connector API troubleshooting). Facilitation-style training is fine; deep platform tutoring is a stretch.
 - Listing is in a domain the user has explicitly excluded (GoHighLevel, generic WordPress plugin work)
+- Posted more than 2 days ago AND proposals submitted ≥ 20 (if proposal count is not visible, treat as unknown — do not auto-fail on age alone)
+- Posted more than 4 days ago
+- If listing requires demonstrated production experience with a tool user is currently learning (e.g. Cowork sub-agents, Agent SDK), do NOT fail — flag in one_line_why as "experience gap" and let user decide.
 
 General-jobs FAIL conditions (any one of these):
 - Full-time required (>30 hrs/week)
