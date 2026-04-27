@@ -1,6 +1,6 @@
 project_slug: job-search
 doc_type: tooling
-updated_at: 2026-04-26
+updated_at: 2026-04-27
 url: https://cdn.jsdelivr.net/gh/squagwallow/job-search@main/docs/extraction-bookmarklets.md
 
 # Extraction Bookmarklets
@@ -23,70 +23,60 @@ Verify: open a search results page, click the bookmark in the bookmarks bar, exp
 
 ## Bookmarklet — Upwork
 
-Run on a search results page (URL like `upwork.com/nx/search/jobs/?q=...&sort=recency`). DOM selectors are best-guess; verify on first use and tune via DevTools (right-click a job tile → Inspect) if extraction returns 0 jobs or wrong fields.
+Run on a search results page (URL like `upwork.com/nx/search/jobs/?q=...&sort=recency`).
 
-```javascript
-javascript:(function(){const tiles=document.querySelectorAll('article[data-test="JobTile"], section[data-test="JobTile"], [data-test="job-tile-list"] > article, [data-test="job-tile-list"] > section');const out=[];out.push('# Upwork extract — '+new Date().toISOString().slice(0,10));out.push('Source: '+window.location.href);out.push('Tiles found: '+tiles.length);out.push('');tiles.forEach((t,i)=>{const a=t.querySelector('h2 a, [data-test="job-tile-title"] a, h3 a');const title=(a&&a.textContent||'').trim();const url=a&&a.href||'';const posted=(t.querySelector('[data-test="job-pubilshed-date"], small[data-test], small.text-light')||{}).textContent||'';const type=(t.querySelector('[data-test="job-type"], [data-test="job-type-label"]')||{}).textContent||'';const budget=(t.querySelector('[data-test="budget"], [data-test="is-fixed-price"], [data-test="is-hourly"]')||{}).textContent||'';const skills=Array.from(t.querySelectorAll('[data-test="attr-item"], .air3-token, [data-test="token"]')).map(s=>s.textContent.trim()).filter(Boolean).join(', ');const verified=t.querySelector('[data-test="payment-verified"]')?'verified':'';const rating=(t.querySelector('[data-test="rating"], .air3-rating-value-text')||{}).textContent||'';const spent=(t.querySelector('[data-test="formatted-amount"], [data-test="client-spendings"]')||{}).textContent||'';const country=(t.querySelector('[data-test="client-country"]')||{}).textContent||'';const proposals=(t.querySelector('[data-test="proposals"], [data-test="proposals-tier"]')||{}).textContent||'';const desc=((t.querySelector('[data-test="job-description-text"], [data-test="UpCLineClamp"] span, .description span')||{}).textContent||'').trim().slice(0,500);out.push('## '+(i+1)+'. ['+title+']('+url+')');out.push('- Posted: '+posted.trim());out.push('- Type: '+type.trim()+' | Budget: '+budget.trim());out.push('- Client: '+[verified,rating.trim(),spent.trim(),country.trim()].filter(Boolean).join(' · '));out.push('- Proposals: '+proposals.trim());if(skills)out.push('- Skills: '+skills);out.push('- Description: '+desc);out.push('');});const text=out.join('\n');navigator.clipboard.writeText(text).then(()=>alert('Copied '+tiles.length+' Upwork jobs to clipboard ('+text.length+' chars)')).catch(e=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Copied '+tiles.length+' jobs (fallback method)');});})();
+```
+javascript:(function(){var t=document.querySelectorAll('[data-test=JobTile]');if(!t.length){alert('Still 0 tiles. Tell Claude.');return;}var o='# Upwork '+new Date().toISOString().slice(0,10)+'\n';t.forEach(function(x,i){var a=x.querySelector('h2 a')||x.querySelector('a[href*="/jobs/"]');o+='## '+(i+1)+'. ['+(a?a.textContent.trim():'?')+']('+(a?a.href:'')+')\n'+x.innerText.replace(/\s+/g,' ').slice(0,400)+'\n\n';});navigator.clipboard.writeText(o).then(function(){alert('Copied '+t.length+' jobs');}).catch(function(e){alert(''+e);});})();
 ```
 
-Selector rationale (why these were chosen):
-- Tile container: `article[data-test="JobTile"]` is Upwork's standard job-tile element. Fallback to `section` and to children of `[data-test="job-tile-list"]` in case Upwork redesigns.
-- Title link: `h2 a` is the typical title element; fallbacks to `[data-test="job-tile-title"]` and `h3 a`.
-- Posted: `data-test="job-pubilshed-date"` (note: Upwork has historically had this typo on "pubilshed"; if Upwork ever fixes it, the selector breaks).
-- Other fields use `data-test` attributes when available.
+Selector rationale: `[data-test=JobTile]` targets Upwork's stable article element. Quote-free attribute selector avoids browser bookmark URL-field mangling.
 
-If extraction returns 0 jobs: open DevTools, inspect a tile, find the actual outermost element with a `data-test` attribute, and replace the `tiles` querySelectorAll selector.
+## Bookmarklet — LinkedIn ✓ TESTED 2026-04-27
 
-## Bookmarklet — LinkedIn
+Run on a saved-search results page. LinkedIn uses pagination (not infinite scroll) — each page shows ~25 listings. Run the bookmarklet on each page separately and paste all extracts together into the Claude Project.
 
-Run on a saved-search results page or `/jobs/search/` results. LinkedIn obfuscates class names heavily and lazy-loads jobs as you scroll, so you may need to scroll to the bottom of the visible list before clicking the bookmarklet.
+Key finding: LinkedIn's class names are hashed and change on every deploy. The stable selector is `componentkey^="job-card-component-ref-"` on the outer div. URLs are constructed from the job ID embedded in that attribute rather than hunting for an `<a>` tag (which is nested too deep to reliably select).
 
-```javascript
-javascript:(function(){const tiles=document.querySelectorAll('div.job-card-container, li.jobs-search-results__list-item, div.base-card[data-entity-urn*="jobPosting"]');const out=[];out.push('# LinkedIn extract — '+new Date().toISOString().slice(0,10));out.push('Source: '+window.location.href);out.push('Tiles found: '+tiles.length);out.push('');tiles.forEach((t,i)=>{const a=t.querySelector('a.job-card-list__title, a.base-card__full-link, a.job-card-container__link');const title=((a&&(a.querySelector('span[aria-hidden]')||a)).textContent||'').trim();let url=a&&a.href||'';if(url&&!url.startsWith('http'))url='https://www.linkedin.com'+url;const company=((t.querySelector('span.job-card-container__primary-description, h4.base-search-card__subtitle, a.job-card-container__company-name')||{}).textContent||'').trim();const location=((t.querySelector('li.job-card-container__metadata-item, span.job-search-card__location')||{}).textContent||'').trim();const posted=((t.querySelector('time, .job-search-card__listdate')||{}).textContent||'').trim();const flags=Array.from(t.querySelectorAll('li.job-card-container__metadata-item--workplace-type, .job-card-container__footer-item')).map(s=>s.textContent.trim()).filter(Boolean).join(' · ');out.push('## '+(i+1)+'. ['+title+']('+url+')');out.push('- Company: '+company);out.push('- Location: '+location);out.push('- Posted: '+posted);if(flags)out.push('- Tags: '+flags);out.push('');});const text=out.join('\n');navigator.clipboard.writeText(text).then(()=>alert('Copied '+tiles.length+' LinkedIn jobs ('+text.length+' chars)')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Copied '+tiles.length+' jobs (fallback)');});})();
+```
+javascript:(function(){var t=document.querySelectorAll('div[componentkey^="job-card-component-ref-"]');if(!t.length){alert('0 tiles. Tell Claude.');return;}var seen={};var o='# LinkedIn '+new Date().toISOString().slice(0,10)+'\n';var count=0;t.forEach(function(x){var key=x.getAttribute('componentkey');if(seen[key])return;seen[key]=true;var id=key.replace('job-card-component-ref-','');var url='https://www.linkedin.com/jobs/view/'+id+'/';var title=x.querySelector('strong')||x.querySelector('h3')||x.querySelector('h2');var t2=title?title.textContent.trim():x.innerText.split('\n')[0].trim();count++;o+='## '+count+'. ['+t2+']('+url+')\n'+x.innerText.replace(/\s+/g,' ').slice(0,400)+'\n\n';});navigator.clipboard.writeText(o).then(function(){alert('Copied '+count+' jobs');}).catch(function(e){alert(''+e);});})();
 ```
 
-LinkedIn caveats:
-- LinkedIn lazy-loads results. Scroll to bottom of the visible list before running, or only the rendered tiles will be captured.
-- Selectors here are educated guesses based on common LinkedIn patterns. LinkedIn redesigns aggressively; expect first-use selector tuning.
-- Description preview is intentionally omitted because LinkedIn's tile-level descriptions are minimal; the email digest format may be more useful for LinkedIn anyway.
+LinkedIn notes:
+- Pages show ~25 jobs each. Use pagination controls, run bookmarklet per page.
+- Title text appears doubled in body (LinkedIn renders it twice in the card) — harmless, Claude parses through it fine.
+- If 0 tiles: LinkedIn may have changed the componentkey attribute name. Inspect a card, find the new stable data attribute, update the selector.
 
-## Bookmarklet — Indeed
+## Bookmarklet — Indeed (NEEDS TESTING)
 
-Run on an Indeed search results page (URL like `indeed.com/jobs?q=...&l=...`). Indeed's structure is more stable than LinkedIn's.
+Run on an Indeed search results page. Append `&sort=date` to all Indeed URLs before bookmarking.
 
-```javascript
-javascript:(function(){const tiles=document.querySelectorAll('div.job_seen_beacon, td.resultContent, div[data-jk]');const out=[];out.push('# Indeed extract — '+new Date().toISOString().slice(0,10));out.push('Source: '+window.location.href);out.push('Tiles found: '+tiles.length);out.push('');tiles.forEach((t,i)=>{const a=t.querySelector('h2 a, a.jcs-JobTitle');const titleSpan=t.querySelector('h2 span[title], h2 a span');const title=(titleSpan&&titleSpan.textContent||a&&a.textContent||'').trim();const jk=t.getAttribute('data-jk')||(a&&a.getAttribute('data-jk'))||'';const url=jk?'https://www.indeed.com/viewjob?jk='+jk:(a&&a.href||'');const company=((t.querySelector('span.companyName, [data-testid="company-name"]')||{}).textContent||'').trim();const location=((t.querySelector('div.companyLocation, [data-testid="text-location"]')||{}).textContent||'').trim();const salary=((t.querySelector('div.salary-snippet-container, .metadata.salary-snippet-container, [data-testid="attribute_snippet_testid"]')||{}).textContent||'').trim();const posted=((t.querySelector('span.date, [data-testid="myJobsStateDate"]')||{}).textContent||'').trim();const desc=((t.querySelector('div.job-snippet, [data-testid="belowJobSnippet"]')||{}).textContent||'').trim().slice(0,400);out.push('## '+(i+1)+'. ['+title+']('+url+')');out.push('- Company: '+company);out.push('- Location: '+location);if(salary)out.push('- Salary: '+salary);out.push('- Posted: '+posted);if(desc)out.push('- Description: '+desc);out.push('');});const text=out.join('\n');navigator.clipboard.writeText(text).then(()=>alert('Copied '+tiles.length+' Indeed jobs ('+text.length+' chars)')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('Copied '+tiles.length+' jobs (fallback)');});})();
+```
+javascript:(function(){var t=document.querySelectorAll('.job_seen_beacon');if(!t.length){t=document.querySelectorAll('div[class*="resultContent"]');}if(!t.length){alert('0 tiles. Tell Claude.');return;}var o='# Indeed '+new Date().toISOString().slice(0,10)+'\n';t.forEach(function(x,i){var a=x.querySelector('a[id^="job_"]')||x.querySelector('a[href*="/rc/clk"]')||x.querySelector('h2 a');var title=a?a.textContent.trim():'?';var url=a?'https://indeed.com'+a.getAttribute('href'):'';o+='## '+(i+1)+'. ['+title+']('+url+')\n'+x.innerText.replace(/\s+/g,' ').slice(0,400)+'\n\n';});navigator.clipboard.writeText(o).then(function(){alert('Copied '+t.length+' jobs');}).catch(function(e){alert(''+e);});})();
 ```
 
 ## Failure modes
 
 | Symptom | Likely cause | Fix |
 |---|---|---|
-| Alert says "Copied 0 jobs" | Tile container selector doesn't match current DOM | Right-click a tile → Inspect → find outermost element with `data-test` or stable class → update `tiles` querySelectorAll selector |
-| Title or URL is blank in output | Title link selector doesn't match | Inspect the title link, update the `a.querySelector(...)` line |
-| Output captures sidebar/filter elements | Tile selector is too broad | Tighten the selector (add a more specific data attribute) |
-| Clipboard copy fails | Some browsers block `clipboard.writeText` outside user-initiated events | The bookmarklet has a `document.execCommand('copy')` fallback; if both fail, try a different browser |
-| Bookmarklet does nothing visible | JS error | Open DevTools console, run the bookmarklet again, look for the error message |
+| Alert says "Copied 0 jobs" | Tile container selector doesn't match current DOM | Right-click a tile → Inspect → find outermost element with stable data attribute → update selector |
+| Title or URL is blank | Title link selector doesn't match | Inspect the title link, update the querySelector line |
+| Bookmarklet does nothing | URL field truncated by browser | Right-click bookmark → Edit → verify URL ends with `});})();` not mid-word |
+| Clipboard copy fails | Browser blocks clipboard outside user gesture | Click somewhere on the page first, then click bookmarklet |
 
-## Fallback — raw Cmd-A copy
+## Pending system prompt edits
 
-If a bookmarklet is broken and you don't have time to fix selectors:
+These edits need to be applied in TWO places: Claude Project > Job Search Daily Triage > System instructions AND repo > docs/daily-use-prompt.md.
 
-1. `Cmd-A` on the search results page.
-2. `Cmd-C`.
-3. Paste into Claude Project. Claude will rank by description content alone.
-4. Without links, Claude cannot output clickable URLs in its triage table. To find a recommended listing on the page, use `Cmd-F` and search for the title.
+**Edit 1 — Recency filter** (add to Upwork FAIL conditions):
+> Posted more than 2 days ago AND proposals submitted >= 20. If proposal count not visible, do not auto-fail on age alone.
 
-This is degraded but not broken. Tier-A surfacing still works; the only loss is one-click navigation.
+**Edit 2 — Experience gap flag** (add to Upwork FAIL conditions):
+> If listing requires demonstrated production experience with a tool the user is currently learning (e.g. Cowork sub-agents, Agent SDK dispatch mode), do NOT fail — flag in one_line_why as "experience gap" and let user decide.
 
-## Update protocol
-
-When a bookmarklet stops working (Upwork redesigns, LinkedIn changes class names):
-1. Inspect the live page DOM to find new selectors.
-2. Update the JS source above.
-3. Re-install the bookmarklet (paste new JS into the bookmark's URL field).
-4. Note the change at the bottom of this file with the date and what changed.
+**Edit 3 — Credential language flag** (add to Upwork FAIL conditions):
+> If listing requires a credentialed practitioner role by title or licensure ("seasoned [profession]", "licensed [role]", "certified [specialist]") in a domain outside the user's portfolio, FAIL.
 
 ## Change log
 
-- 2026-04-26: Initial bookmarklets for Upwork, LinkedIn, Indeed. Selectors are best-guess; expect first-use tuning.
+- 2026-04-26: Initial bookmarklets for Upwork, LinkedIn, Indeed. Selectors best-guess.
+- 2026-04-27: Replaced LinkedIn bookmarklet with tested working version using componentkey selector. Added pending system prompt edits section. LinkedIn confirmed working: 25 unique jobs, correct URLs.
